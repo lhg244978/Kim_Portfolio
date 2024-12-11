@@ -1,0 +1,62 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
+body,
+.v-application,
+.headline,
+.title,
+.subheading,
+.pretendard {
+  font-family: "Pretendard", sans-serif !important;
+  font-weight: 400 !important;
+  background-color: #141414;
+}
+
+.container {
+  max-width: 100% !important;
+}
+
+.v-card__subtitle,
+.v-card__text {
+  line-height: normal;
+}
+
+.no-background-hover::before {
+  background-color: transparent !important;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.v-carousel__controls {
+  background: none !important;
+  height: auto !important;
+  bottom: 4px !important;
+}
+
+.v-carousel__controls > .v-item-group > button {
+  width: 6px;
+  height: 6px;
+  margin: 0 2px;
+}
+
+.v-carousel__controls .v-item-group .v-btn:before {
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+  opacity: 1;
+}
+.v-carousel__controls .v-item-group .theme--dark.v-btn--active:hover::before,
+.theme--dark.v-btn--active::before {
+  width: 6px;
+  height: 6px;
+  background-color: #747474 !important;
+  opacity: 1;
+}
+.v-carousel__controls .v-item-group button span {
+  display: none !important;
+}
+
+.v-slide-group__content {
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
+}
