@@ -15,6 +15,18 @@
        `"
       >
         <div
+          v-if="scrollInterval"
+          class="fixed-scroll-text fadeinEffect"
+          :style="`width: 100%;${
+            scrollY > windowSize.height * 1.3
+              ? 'position: absolute;  top:' + windowSize.height * 1.1 + 'px;'
+              : ''
+          }`"
+        >
+          <v-icon color="#fff">mdi-mouse-scroll-wheel</v-icon> 스크롤을
+          내려주세요.
+        </div>
+        <div
           v-if="5 < scrollY"
           class="fixed-text fadeinEffect"
           :style="`width: 100%;${
@@ -58,7 +70,7 @@
                 7
             }px`"
           >
-            계속해서 버전업 중인 개발자의 기록
+            계속해서 버전업 중인 개발자를
           </span>
           <br />
           <span
@@ -70,7 +82,7 @@
                 7
             }px`"
           >
-            함께 봐주실래요?
+            소개합니다.
           </span>
         </div>
       </v-col>
@@ -122,7 +134,7 @@
                   :size="windowSize.width > 1200 ? 54 : 44"
                   >mdi-account</v-icon
                 >
-                <p class="mr-auto ml-5 text-center about_p">
+                <p class="mr-auto ml-5 text-center about-p">
                   <span
                     :style="`font-weight:700;font-size: ${
                       windowSize.width > 1200 ? 20 : 18
@@ -146,7 +158,7 @@
                   :size="windowSize.width > 1200 ? 54 : 44"
                   >mdi-calendar-blank</v-icon
                 >
-                <p class="mr-auto ml-5 text-center about_p">
+                <p class="mr-auto ml-5 text-center about-p">
                   <span
                     :style="`font-weight:700;font-size: ${
                       windowSize.width > 1200 ? 20 : 18
@@ -170,7 +182,7 @@
                   :size="windowSize.width > 1200 ? 54 : 44"
                   >mdi-map-marker</v-icon
                 >
-                <p class="mr-auto ml-5 text-center about_p">
+                <p class="mr-auto ml-5 text-center about-p">
                   <span
                     :style="`font-weight:700;font-size: ${
                       windowSize.width > 1200 ? 20 : 18
@@ -194,7 +206,7 @@
                   :size="windowSize.width > 1200 ? 54 : 44"
                   >mdi-phone</v-icon
                 >
-                <p class="mr-auto ml-5 text-center about_p">
+                <p class="mr-auto ml-5 text-center about-p">
                   <span
                     :style="`font-weight:700;font-size: ${
                       windowSize.width > 1200 ? 20 : 18
@@ -218,7 +230,7 @@
                   :size="windowSize.width > 1200 ? 54 : 44"
                   >mdi-email-outline</v-icon
                 >
-                <p class="mr-auto ml-5 text-center about_p">
+                <p class="mr-auto ml-5 text-center about-p">
                   <span
                     :style="`font-weight:700;font-size: ${
                       windowSize.width > 1200 ? 20 : 18
@@ -242,7 +254,7 @@
                   :size="windowSize.width > 1200 ? 54 : 44"
                   >mdi-pencil-outline</v-icon
                 >
-                <p class="mr-auto ml-5 text-center about_p">
+                <p class="mr-auto ml-5 text-center about-p">
                   <span
                     :style="`font-weight:700;font-size: ${
                       windowSize.width > 1200 ? 20 : 18
@@ -266,6 +278,196 @@
       ></v-row
     >
     <!-- ABOUT ME -->
+    <!-- SKILLS  -->
+    <v-row
+      no-gutters
+      aling="center"
+      justify="center"
+      style="background-color: #2a52be"
+    >
+      <v-col
+        :class="`text-center d-flex ${
+          windowSize.width > 1200 ? 'pa-15' : 'pa-5'
+        }`"
+        :style="`${
+          windowSize.width > 1500
+            ? 'max-width:1500px; min-width:1500px'
+            : 'max-width:100%; min-width:100%'
+        };
+       `"
+      >
+        <v-row no-gutters align="center">
+          <v-col
+            cols="12"
+            :style="` color:#fff;font-size:${
+              windowSize.width > 1200 ? 34 : 24
+            }px; font-weight:900;`"
+          >
+            <v-row no-gutters align="center" justify="center">
+              <v-icon
+                class="mr-2 ml-auto"
+                color="#fff"
+                :size="windowSize.width > 1200 ? 54 : 44"
+                >mdi-link-variant</v-icon
+              ><span
+                :style="`font-size: ${windowSize.width > 1200 ? 44 : 34}px`"
+                >SKILLS</span
+              >
+
+              <v-btn
+                class="ml-auto ml-5"
+                @click="develope_shake = !develope_shake"
+                >{{ develope_shake ? "STOP" : "SHAKE" }}</v-btn
+              >
+            </v-row>
+            <v-row
+              :class="windowSize.width > 600 ? 'mt-15' : 'mt-5'"
+              no-gutters
+              align="center"
+              justify="center"
+              style="position: relative; height: 400px"
+            >
+              <v-col class="d-flex" cols="12">
+                <v-row no-gutters align="center">
+                  Language
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/JavaScript.svg"
+                    ref="js"
+                  ></v-img>
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/sql.png"
+                    ref="sql"
+                  ></v-img
+                ></v-row>
+              </v-col>
+              <v-col class="d-flex" cols="12">
+                <v-row no-gutters align="center"
+                  >Frontend
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/HTML.svg"
+                    ref="html"
+                  ></v-img>
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/CSS.svg"
+                    ref="css"
+                  ></v-img>
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/JQuery.svg"
+                    ref="jq"
+                  ></v-img>
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/VueJs-Light.svg"
+                    ref="vue"
+                  ></v-img>
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/NuxtJS-Light.svg"
+                    ref="nuxt"
+                  ></v-img
+                ></v-row>
+              </v-col>
+              <v-col class="d-flex" cols="12">
+                <v-row no-gutters align="center">
+                  Backend
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/NodeJS-Light.svg"
+                    ref="node"
+                  ></v-img>
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/MYSQL-Light.svg"
+                    ref="mysql"
+                  ></v-img>
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/Firebase-Light.svg"
+                    ref="firebase"
+                  ></v-img>
+                </v-row>
+              </v-col>
+              <v-col class="d-flex" cols="12">
+                <v-row no-gutters align="center">
+                  DevOps
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/AWS-Light.svg"
+                    ref="aws"
+                  ></v-img>
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/Github-Light.svg"
+                    ref="git"
+                  ></v-img>
+                  <v-img
+                    contain
+                    class="develope-icon"
+                    :width="windowSize.width > 500 ? 50 : 30"
+                    :height="windowSize.width > 500 ? 50 : 30"
+                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    src="/Develope_Skill_Icon/linux.svg"
+                    ref="linux"
+                  ></v-img>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-col> </v-row></v-col
+    ></v-row>
+    <!-- SKILLS  -->
   </v-container>
 </template>
 
@@ -273,8 +475,39 @@
 export default {
   components: {},
   watch: {
-    scrollY() {
-      console.log(this.scrollY);
+    windowSizeWidth() {
+      //
+      this.develope_shake = true;
+      this.develope_shake = false;
+    },
+    develope_shake(val) {
+      if (val) {
+        for (var idx in this.develope_icon_id) {
+          const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
+
+          img_ref.style.left = "50%";
+          img_ref.style.top = "50%";
+          img_ref.style.transform = "translate(-50%, -50%)";
+          img_ref.style.position = "absolute";
+        }
+        this.randomIcon();
+        document.addEventListener("mousemove", this.shakeIcon);
+      } else {
+        // 랜덤 아이콘 인터벌 초기화
+        this.randomIcon();
+        // 마우스 근처로 진입시 멀어지는 이벤트 초기화
+        document.removeEventListener("mousemove", this.shakeIcon);
+        for (var idx in this.develope_icon_id) {
+          const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
+
+          img_ref.style.position = "relative";
+          img_ref.style.transform = "translate(-0%, -0%)";
+          img_ref.style.left = ``;
+          img_ref.style.top = ``;
+          img_ref.style.marginLeft = `10px`;
+          img_ref.style.marginTop = `10px`;
+        }
+      }
     },
   },
   filters: {},
@@ -285,12 +518,114 @@ export default {
     scrollY() {
       return this.$store.state.scrollY;
     },
+    windowSizeWidth() {
+      return this.$store.state.windowSize.width;
+    },
   },
   data() {
-    return {};
+    return {
+      interval: null,
+      randomIcon_interval: [],
+      scrollInterval: false,
+      develope_shake: false,
+      develope_icon_id: [
+        "js",
+        "sql",
+        "html",
+        "css",
+        "jq",
+        "vue",
+        "nuxt",
+        "node",
+        "mysql",
+        "firebase",
+        "aws",
+        "git",
+        "linux",
+      ],
+    };
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    // 초기 위치 설정
+    for (var idx in this.develope_icon_id) {
+      const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
+      img_ref.style.left = "50%";
+      img_ref.style.top = "50%";
+      img_ref.style.transform = "translate(-50%, -50%)";
+    }
+
+    setTimeout(() => {
+      this.develope_shake = true;
+    }, 1000);
+
+    this.interval = setInterval(() => {
+      this.scrollInterval = !this.scrollInterval;
+    }, 800);
+  },
+  methods: {
+    randomIcon() {
+      if (this.develope_shake) {
+        for (var idx in this.develope_icon_id) {
+          const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
+
+          const maxX = window.innerWidth - img_ref.offsetWidth * 2;
+          const maxY = 350;
+
+          // 배열로 저장 후 clearinterval시 사용
+          this.randomIcon_interval.push(
+            setInterval(() => {
+              const randomX = Math.random() * maxX;
+              const randomY = Math.random() * maxY;
+              const randomRotation = Math.random() * 360;
+              // 수시로 랜덤하게 위치 변경
+              img_ref.style.left = `${randomX}px`;
+              img_ref.style.top = `${randomY}px`;
+              img_ref.style.transform = `translate(-50%, -50%) rotate(${randomRotation}deg)`;
+            }, 3000)
+          );
+        }
+      } else {
+        if (this.randomIcon_interval.length) {
+          //배열에 저장되어 있는 각각 이미지의 인터벌 제거
+          for (var idx in this.randomIcon_interval) {
+            clearInterval(this.randomIcon_interval[idx]);
+          }
+          this.randomIcon_interval = [];
+        }
+      }
+    },
+    shakeIcon(e) {
+      if (this.develope_shake) {
+        for (var idx in this.develope_icon_id) {
+          const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
+
+          const moveimgRect = img_ref.getBoundingClientRect();
+          let threshold = 150;
+
+          const imgX = moveimgRect.left + moveimgRect.width / 2;
+          const imgY = moveimgRect.top + moveimgRect.height / 2;
+
+          const distanceX = e.clientX - imgX;
+          const distanceY = e.clientY - imgY;
+          const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
+          if (distance < threshold) {
+            const angle = Math.atan2(distanceY, distanceX);
+            const moveX = -Math.cos(angle) * (threshold - distance);
+            const moveY = -Math.sin(angle) * (threshold - distance);
+
+            const newLeft = img_ref.offsetLeft + moveX;
+            const newTop = img_ref.offsetTop + moveY;
+
+            // 화면 경계를 벗어나지 않도록 제한
+            const maxX = (window.innerWidth - moveimgRect.width) * 0.9;
+            const maxY = 350;
+            img_ref.style.left = `${Math.min(Math.max(newLeft, 0), maxX)}px`;
+            img_ref.style.top = `${Math.min(Math.max(newTop, 0), maxY)}px`;
+          }
+        }
+      }
+    },
+  },
 };
 </script>
 <style scoped>
@@ -330,8 +665,22 @@ export default {
   text-align: center;
   color: #fff;
 }
-.about_p {
+.fixed-scroll-text {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+}
+.about-p {
   line-height: 0.8;
   min-width: 200px;
+}
+
+.develope-icon {
+  position: absolute;
+  transition: transform 0.5s, left 0.5s, top 0.5s;
 }
 </style>

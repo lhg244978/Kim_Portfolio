@@ -3,18 +3,17 @@
 ## Build Setup
 
 ```bash
-# install dependencies
+# 실행 전 node_modules 다운
 $ npm install
 
-# serve with hot reload at localhost:3000
+# 로컬로 실행 URL : localhost:3000
 $ npm run dev
 
-# build for production and launch server
-$ npm run build
-$ npm run start
 
-# generate static project
+# 프로젝트 distibution 폴더 생성
 $ npm run generate
+
+#이하 설명
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
