@@ -86,6 +86,7 @@
           </span>
         </div>
       </v-col>
+      <v-img class="mb-5" max-width="50" src="/img/down_arrow.svg"></v-img>
     </v-row>
     <!-- HERO -->
     <!-- ABOUT ME -->
@@ -93,7 +94,7 @@
       no-gutters
       aling="center"
       justify="center"
-      style="background-color: #fff"
+      style="background-color: #e1e6e8"
     >
       <v-col
         :class="`text-center d-flex ${
@@ -127,7 +128,7 @@
               align="center"
               justify="center"
             >
-              <v-col class="d-flex" cols="12" sm="6" md="4">
+              <v-col class="d-flex mb-5" cols="12" sm="6" md="4">
                 <v-icon
                   :class="windowSize.width > 600 ? 'ml-5' : 'ml-auto'"
                   color="#000"
@@ -151,7 +152,7 @@
                   >
                 </p></v-col
               >
-              <v-col class="d-flex" cols="12" sm="6" md="4">
+              <v-col class="d-flex mb-5" cols="12" sm="6" md="4">
                 <v-icon
                   :class="windowSize.width > 600 ? 'ml-5' : 'ml-auto'"
                   color="#000"
@@ -175,7 +176,7 @@
                   >
                 </p></v-col
               >
-              <v-col class="d-flex" cols="12" sm="6" md="4">
+              <v-col class="d-flex mb-5" cols="12" sm="6" md="4">
                 <v-icon
                   :class="windowSize.width > 600 ? 'ml-5' : 'ml-auto'"
                   color="#000"
@@ -199,7 +200,7 @@
                   >
                 </p></v-col
               >
-              <v-col class="d-flex" cols="12" sm="6" md="4">
+              <v-col class="d-flex mb-5" cols="12" sm="6" md="4">
                 <v-icon
                   :class="windowSize.width > 600 ? 'ml-5' : 'ml-auto'"
                   color="#000"
@@ -223,7 +224,7 @@
                   >
                 </p></v-col
               >
-              <v-col class="d-flex" cols="12" sm="6" md="4">
+              <v-col class="d-flex mb-5" cols="12" sm="6" md="4">
                 <v-icon
                   :class="windowSize.width > 600 ? 'ml-5' : 'ml-auto'"
                   color="#000"
@@ -247,7 +248,7 @@
                   >
                 </p></v-col
               >
-              <v-col class="d-flex" cols="12" sm="6" md="4">
+              <v-col class="d-flex mb-5" cols="12" sm="6" md="4">
                 <v-icon
                   :class="windowSize.width > 600 ? 'ml-5' : 'ml-auto'"
                   color="#000"
@@ -299,7 +300,7 @@
         <v-row no-gutters align="center">
           <v-col
             cols="12"
-            :style="` color:#fff;font-size:${
+            :style="`color:#fff;font-size:${
               windowSize.width > 1200 ? 34 : 24
             }px; font-weight:900;`"
           >
@@ -325,7 +326,9 @@
               no-gutters
               align="center"
               justify="center"
-              style="position: relative; height: 400px"
+              :style="`color:#fff;font-size:${
+                windowSize.width > 1200 ? 34 : 28
+              }px; font-weight:700; position: relative; height: 400px`"
             >
               <v-col class="d-flex" cols="12">
                 <v-row no-gutters align="center">
@@ -333,18 +336,54 @@
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/JavaScript.svg"
                     ref="js"
                   ></v-img>
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/sql.png"
                     ref="sql"
                   ></v-img
@@ -356,45 +395,135 @@
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/HTML.svg"
                     ref="html"
                   ></v-img>
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/CSS.svg"
                     ref="css"
                   ></v-img>
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/JQuery.svg"
                     ref="jq"
                   ></v-img>
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/VueJs-Light.svg"
                     ref="vue"
                   ></v-img>
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/NuxtJS-Light.svg"
                     ref="nuxt"
                   ></v-img
@@ -406,27 +535,81 @@
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/NodeJS-Light.svg"
                     ref="node"
                   ></v-img>
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/MYSQL-Light.svg"
                     ref="mysql"
                   ></v-img>
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/Firebase-Light.svg"
                     ref="firebase"
                   ></v-img>
@@ -438,36 +621,253 @@
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/AWS-Light.svg"
                     ref="aws"
                   ></v-img>
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/Github-Light.svg"
                     ref="git"
                   ></v-img>
                   <v-img
                     contain
                     class="develope-icon"
-                    :width="windowSize.width > 500 ? 50 : 30"
-                    :height="windowSize.width > 500 ? 50 : 30"
-                    :max-width="windowSize.width > 500 ? 50 : 30"
+                    :width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :height="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
+                    :max-width="
+                      windowSize.width > 1000
+                        ? 80
+                        : windowSize.width > 500
+                        ? 50
+                        : 30
+                    "
                     src="/Develope_Skill_Icon/linux.svg"
                     ref="linux"
                   ></v-img>
                 </v-row>
               </v-col>
             </v-row>
-          </v-col> </v-row></v-col
-    ></v-row>
+            <v-col
+              cols="12"
+              v-if="develope_shake"
+              class="text-center mt-5"
+              style="color: #fff; font-size: 14px; font-weight: 600"
+            >
+              클릭하면 아이콘이 도망가요~
+            </v-col>
+          </v-col>
+        </v-row></v-col
+      ></v-row
+    >
     <!-- SKILLS  -->
+    <!-- CAREER  -->
+    <v-row
+      no-gutters
+      aling="center"
+      justify="center"
+      style="background-color: #e1e6e8"
+    >
+      <v-col
+        :class="`text-center d-flex ${
+          windowSize.width > 1200 ? 'pa-15' : 'pa-5'
+        }`"
+        :style="`${
+          windowSize.width > 1500
+            ? 'max-width:1500px; min-width:1500px'
+            : 'max-width:100%; min-width:100%'
+        };
+       `"
+      >
+        <v-row no-gutters align="center">
+          <v-col
+            cols="12"
+            class="mb-10"
+            :style="` color:#000;font-size:${
+              windowSize.width > 1200 ? 34 : 24
+            }px; font-weight:900; `"
+          >
+            <v-icon
+              class="mr-2"
+              color="#000"
+              :size="windowSize.width > 1200 ? 54 : 44"
+              >mdi-link-variant</v-icon
+            ><span :style="`font-size: ${windowSize.width > 1200 ? 44 : 34}px`">
+              CAREER</span
+            ></v-col
+          >
+          <v-col cols="12">
+            <v-row no-gutters align="center">
+              <v-col
+                cols="12"
+                md="3"
+                :style="` color:#2a52be; font-size:${
+                  windowSize.width > 1200 ? 34 : 24
+                }px; font-weight:900; `"
+              >
+                <span>(주) 위드라이브</span>
+                <v-card
+                  class="mx-auto mt-5"
+                  max-width="100"
+                  flat
+                  style="border-radius: 50%"
+                >
+                  <v-card-text class="pa-0">
+                    <v-img
+                      src="/img/wedrive.png"
+                      style="border-radius: 50%"
+                    ></v-img>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="12" md="9" class="d-flex">
+                <v-row no-gutters>
+                  <v-col cols="1">
+                    <div class="career-circle"></div>
+                    <div class="dotted-divider" vertical></div>
+                  </v-col>
+                  <v-col cols="11" class="text-left pl-5" style="color: #2a52be"
+                    ><p style="font-size: 16px; font-weight: 500">
+                      주식회사 위드라이브 <br />
+                      2021.09 ~ 2024.07 대중교통, 자차 등의 모든 이동이 포인트로
+                      쌓이는 앱테크서비스
+                    </p>
+                  </v-col>
+                  <v-col cols="1">
+                    <div class="career-circle"></div>
+                    <div class="dotted-divider" vertical></div>
+                  </v-col>
+                  <v-col cols="11" class="text-left pl-5" style="color: #2a52be"
+                    ><span style="font-size: 16px; font-weight: 900">
+                      업무내용
+                    </span>
+                    <br />
+                    <v-chip class="mr-2" color="#2a52be">Front-End</v-chip>
+                    <v-chip class="mr-2" color="#2a52be">Back-End</v-chip>
+                    <v-chip class="mr-2" color="#2a52be">DBA</v-chip>
+                  </v-col>
+                  <v-col cols="1">
+                    <div class="career-circle"></div>
+                    <div class="dotted-divider" vertical></div>
+                  </v-col>
+                  <v-col cols="11" class="text-left pl-5" style="color: #2a52be"
+                    ><span style="font-size: 16px; font-weight: 900">
+                      업무 내 사용기술
+                    </span>
+                    <br />
+                    <v-chip class="mr-2" color="#2a52be"> JavaScript</v-chip>
+                    <v-chip class="mr-2" color="#2a52be"> Vus.js </v-chip>
+                    <v-chip class="mr-2" color="#2a52be"> Nuxt.js </v-chip>
+                    <v-chip class="mr-2" color="#2a52be"> Node.js </v-chip>
+                    <v-chip class="mr-2" color="#2a52be"> Mysql </v-chip>
+                    <v-chip class="mr-2" color="#2a52be"> AWS </v-chip>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-col></v-row
+    >
+    <!-- CAREER  -->
+    <!-- PROJECT  -->
+    <v-row
+      no-gutters
+      aling="center"
+      justify="center"
+      style="background-color: #2a52be"
+    >
+      <v-col
+        :class="`text-center d-flex ${
+          windowSize.width > 1200 ? 'pa-15' : 'pa-5'
+        }`"
+        :style="`${
+          windowSize.width > 1500
+            ? 'max-width:1500px; min-width:1500px'
+            : 'max-width:100%; min-width:100%'
+        };
+       `"
+      >
+        <v-row no-gutters align="center">
+          <v-col
+            cols="12"
+            :style="` color:#fff;font-size:${
+              windowSize.width > 1200 ? 34 : 24
+            }px; font-weight:900; `"
+          >
+            <v-icon
+              class="mr-2"
+              color="#fff"
+              :size="windowSize.width > 1200 ? 54 : 44"
+              >mdi-link-variant</v-icon
+            ><span :style="`font-size: ${windowSize.width > 1200 ? 44 : 34}px`"
+              >PROJECT</span
+            ></v-col
+          >
+          <v-col cols="12">
+            <v-row no-gutters align="center">
+              <v-col cols="12"> 토이프로젝트 </v-col>
+              <v-col cols="12"> 사내프로젝트 </v-col>
+            </v-row></v-col
+          >
+        </v-row>
+      </v-col></v-row
+    >
+    <!-- PROJECT  -->
   </v-container>
 </template>
 
@@ -491,12 +891,12 @@ export default {
           img_ref.style.position = "absolute";
         }
         this.randomIcon();
-        document.addEventListener("mousemove", this.shakeIcon);
+        document.addEventListener("click", this.shakeIcon);
       } else {
         // 랜덤 아이콘 인터벌 초기화
         this.randomIcon();
         // 마우스 근처로 진입시 멀어지는 이벤트 초기화
-        document.removeEventListener("mousemove", this.shakeIcon);
+        document.removeEventListener("click", this.shakeIcon);
         for (var idx in this.develope_icon_id) {
           const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
 
@@ -543,6 +943,7 @@ export default {
         "git",
         "linux",
       ],
+      stepnum: 1,
     };
   },
   mounted() {
@@ -682,5 +1083,23 @@ export default {
 .develope-icon {
   position: absolute;
   transition: transform 0.5s, left 0.5s, top 0.5s;
+}
+.dotted-divider {
+  border: dotted #2a52be;
+  height: 70px;
+  width: 1px;
+  border-left-width: 0px;
+  margin-top: 3px;
+  margin-right: 3.5px;
+  margin-left: auto;
+}
+.career-circle {
+  width: 10px;
+  height: 10px;
+  background-color: #2a52be;
+  color: #fff;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-top: -1px;
 }
 </style>
