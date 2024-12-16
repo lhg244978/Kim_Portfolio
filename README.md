@@ -13,6 +13,9 @@ $ npm run dev
 # 프로젝트 distibution 폴더 생성
 $ npm run generate
 
+# 프로젝트 SERVER localhost:8080
+
+
 #이하 설명
 ```
 
