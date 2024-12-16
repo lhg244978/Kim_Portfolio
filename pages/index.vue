@@ -1083,8 +1083,9 @@
           >
           <v-col cols="12">
             <v-row no-gutters align="center">
-              <v-col cols="12"> 토이프로젝트 </v-col>
-              <v-col cols="12"> 사내프로젝트 </v-col>
+              <v-col cols="12">
+                <v-btn @click="axiosTest">axiosTest</v-btn>
+              </v-col>
             </v-row></v-col
           >
         </v-row>
@@ -1104,15 +1105,19 @@ export default {
       this.develope_shake = false;
       if (this.runCareer_step1) {
         if (this.carrer_project_height_start) {
-          this.carrer_project_height_start =
-            this.$refs.carrer_project_start.offsetHeight + 30;
+          if (this.$refs.carrer_project_start) {
+            this.carrer_project_height_start =
+              this.$refs.carrer_project_start.offsetHeight + 30;
+          }
         }
       }
 
       if (this.runCareer_step4) {
         if (this.carrer_project_height) {
-          this.carrer_project_height =
-            this.$refs.carrer_project.offsetHeight + 60;
+          if (this.$refs.carrer_project) {
+            this.carrer_project_height =
+              this.$refs.carrer_project.offsetHeight + 60;
+          }
         }
       }
     },
@@ -1282,20 +1287,44 @@ export default {
     async runCareer() {
       await this.delay(1000);
       this.runCareer_step1 = true;
-      this.carrer_project_height_start =
-        this.$refs.carrer_project_start.offsetHeight + 30;
+      await this.delay(100);
+      if (this.$refs.carrer_project_start) {
+        this.carrer_project_height_start =
+          this.$refs.carrer_project_start.offsetHeight + 30;
+      }
+
       await this.delay(500);
       this.runCareer_step2 = true;
       await this.delay(500);
       this.runCareer_step3 = true;
       await this.delay(500);
       this.runCareer_step4 = true;
-      this.carrer_project_height = this.$refs.carrer_project.offsetHeight + 50;
+      await this.delay(100);
+      if (this.$refs.carrer_project) {
+        this.carrer_project_height =
+          this.$refs.carrer_project.offsetHeight + 50;
+      }
     },
     delay(time) {
       return new Promise((resolve) => {
         setTimeout(resolve, time);
       });
+    },
+    axiosTest() {
+      this.$store
+        .dispatch("api/axios", {
+          method: "GET",
+          uri: `/user`,
+          params: {},
+        })
+        .then((data) => {
+          console.log(data);
+          alert(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err);
+        });
     },
   },
 };

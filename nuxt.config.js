@@ -1,4 +1,5 @@
 import colors from "vuetify/es5/util/colors";
+const { baseURL } = require("./config/server.json");
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -33,7 +34,18 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    // https://go.nuxtjs.dev/axios
+    // axios 프로젝트 전역 설정
+    "@nuxtjs/axios",
+  ],
+
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  // Axios 연결 시 연결 url 설정
+  axios: {
+    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+    browserBaseURL: baseURL,
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
