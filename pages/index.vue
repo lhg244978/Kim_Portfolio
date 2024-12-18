@@ -1081,21 +1081,89 @@
               >PROJECT</span
             ></v-col
           >
-          <v-col cols="12">
-            <v-row no-gutters align="center">
-              <v-col cols="12">
-                <v-btn @click="axiosTest">axiosTest</v-btn>
-              </v-col>
-            </v-row></v-col
-          >
+          <v-col cols="12" class="mt-10">
+            <p style="font-size: 18px">TOY PROJECT</p>
+          </v-col>
+          <v-col cols="12" class="mt-5">
+            <v-row no-gutters>
+              <v-slide-group
+                :style="`width: ${
+                  windowSize.width > 216 * toyProject.length + 100
+                    ? 216 * toyProject.length + 100
+                    : windowSize.width - 50
+                }px;`"
+                :show-arrows="
+                  isMobile ? (windowSize.width > 500 ? true : false) : true
+                "
+              >
+                <v-slide-item v-for="(project_t, idx) in toyProject" :key="idx">
+                  <v-row no-gutters align="start">
+                    <v-card
+                      flat
+                      color="#2a52be"
+                      class="ma-2"
+                      width="200"
+                      height="200"
+                      @mouseenter="onHoverProject(project_t.cover_id)"
+                      @mouseleave="onLeaveProject(project_t.cover_id)"
+                    >
+                      <v-card-text class="pa-0">
+                        <v-row no-gutters style="cursor: pointer">
+                          <v-col
+                            cols="12"
+                            style="height: 170px; position: relative"
+                          >
+                            <v-img
+                              src="/img/folder.png"
+                              width="150"
+                              height="160"
+                              style="
+                                position: absolute;
+                                top: 20px;
+                                left: 0;
+                                z-index: 5;
+                              "
+                            ></v-img>
+                            <v-img
+                              class="folder_file"
+                              :ref="`${project_t.cover_id}`"
+                              :src="`/img/${project_t.cover}.png`"
+                              width="130"
+                              style="
+                                position: absolute;
+                                top: 10;
+                                left: 50px;
+                                transform: rotate(30deg);
+                                transform-origin: center;
+                                z-index: 4;
+                              "
+                            ></v-img>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            style="color: yellow; font-weight: 700"
+                          >
+                            {{ project_t.name }}</v-col
+                          >
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
+                  </v-row>
+                </v-slide-item>
+              </v-slide-group>
+            </v-row>
+          </v-col>
         </v-row>
       </v-col></v-row
     >
     <!-- PROJECT  -->
+    <CoupangReview :dialog="cr"></CoupangReview>
   </v-container>
 </template>
 
 <script>
+import CoupangReview from "@/components/CoupangReview";
+
 export default {
   components: {},
   watch: {
@@ -1202,9 +1270,50 @@ export default {
       runCareer_step2: false,
       runCareer_step3: false,
       runCareer_step4: false,
+      slide: "",
+      cr: false,
+      isMobile: false,
+      toyProject: [
+        {
+          name: "쿠팡 리뷰 가져오기",
+          cover: "cd_2",
+          cover_id: "toyproject_1",
+          dialog: "cr",
+        },
+        {
+          name: "개발 중",
+          cover: "cd_1",
+          cover_id: "toyproject_2",
+          dialog: "none_dialog",
+        },
+        {
+          name: "개발 중",
+          cover: "cd_1",
+          cover_id: "toyproject_3",
+          dialog: "none_dialog",
+        },
+      ],
     };
   },
   mounted() {
+    // 모바일 확인
+    var ua = navigator.userAgent.toLowerCase();
+
+    if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+      this.isMobile = true;
+    } else if (navigator.userAgent.toLowerCase().indexOf("mac os") > -1) {
+      if (ua.includes("macintosh")) {
+        this.isMobile = false;
+        this.userAgent = "MacBook";
+      } else if (ua.includes("iphone")) {
+        this.isMobile = true;
+      } else if (ua.includes("ipad")) {
+        this.isMobile = true;
+      }
+    } else {
+      this.isMobile = false;
+    }
+
     // 초기 위치 설정
     for (var idx in this.develope_icon_id) {
       const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
@@ -1293,11 +1402,11 @@ export default {
           this.$refs.carrer_project_start.offsetHeight + 30;
       }
 
-      await this.delay(500);
+      await this.delay(400);
       this.runCareer_step2 = true;
-      await this.delay(500);
+      await this.delay(400);
       this.runCareer_step3 = true;
-      await this.delay(500);
+      await this.delay(400);
       this.runCareer_step4 = true;
       await this.delay(100);
       if (this.$refs.carrer_project) {
@@ -1310,15 +1419,31 @@ export default {
         setTimeout(resolve, time);
       });
     },
+    onHoverProject(cover_id) {
+      var cover_el =
+        this.$refs[cover_id].length == 1 ? this.$refs[cover_id][0].$el : null;
+      if (cover_el) {
+        cover_el.style.top = "-10px";
+        cover_el.style.marginLeft = "30px";
+      }
+    },
+    onLeaveProject(cover_id) {
+      var cover_el =
+        this.$refs[cover_id].length == 1 ? this.$refs[cover_id][0].$el : null;
+      if (cover_el) {
+        cover_el.style.top = "10px";
+        cover_el.style.marginLeft = "0px";
+      }
+    },
     axiosTest() {
       this.$store
         .dispatch("api/axios", {
           method: "GET",
-          uri: `/user`,
+          uri: `/review`,
           params: {},
         })
         .then((data) => {
-          console.log(data);
+          console.log(data.length);
           alert(data);
         })
         .catch((err) => {
@@ -1401,5 +1526,8 @@ export default {
   border-radius: 50%;
   margin-left: auto;
   margin-top: -1px;
+}
+.folder_file {
+  transition: top 0.3s ease-in-out, margin-left 0.3s ease-in-out !important;
 }
 </style>

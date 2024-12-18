@@ -60,3 +60,9 @@ body,
 .v-slide-group__content {
   transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
 }
+.v-slide-group__next {
+  min-width: 0px !important;
+}
+.v-slide-group__prev {
+  min-width: 0px !important;
+}
