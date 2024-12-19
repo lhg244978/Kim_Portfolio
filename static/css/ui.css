@@ -66,3 +66,17 @@ body,
 .v-slide-group__prev {
   min-width: 0px !important;
 }
+/* url text field css */
+.url-text-field input {
+  color: black !important;
+}
+
+.v-pagination .v-pagination__item {
+  border: 1px solid #1976d2 !important;
+}
+
+/* coupang rationg css */
+
+.v-application--is-ltr .v-rating .v-icon {
+  padding: 0px 3px 0px 3px;
+}

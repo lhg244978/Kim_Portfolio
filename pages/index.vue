@@ -1101,11 +1101,13 @@
                     <v-card
                       flat
                       color="#2a52be"
-                      class="ma-2"
+                      class="ma-2 no-background-hover"
+                      :ripple="false"
                       width="200"
                       height="200"
                       @mouseenter="onHoverProject(project_t.cover_id)"
                       @mouseleave="onLeaveProject(project_t.cover_id)"
+                      @click="openDialog(project_t.dialog)"
                     >
                       <v-card-text class="pa-0">
                         <v-row no-gutters style="cursor: pointer">
@@ -1157,7 +1159,7 @@
       </v-col></v-row
     >
     <!-- PROJECT  -->
-    <CoupangReview :dialog="cr"></CoupangReview>
+    <CoupangReview :dialog="cr" @close="cr = false"></CoupangReview>
   </v-container>
 </template>
 
@@ -1227,6 +1229,16 @@ export default {
         this.runCareer();
       }
     },
+    cr(val) {
+      if (val) {
+      } else {
+      }
+    },
+    none_dialog(val) {
+      if (val) {
+      } else {
+      }
+    },
   },
   filters: {},
   computed: {
@@ -1293,6 +1305,7 @@ export default {
           dialog: "none_dialog",
         },
       ],
+      none_dialog: false,
     };
   },
   mounted() {
@@ -1435,21 +1448,8 @@ export default {
         cover_el.style.marginLeft = "0px";
       }
     },
-    axiosTest() {
-      this.$store
-        .dispatch("api/axios", {
-          method: "GET",
-          uri: `/review`,
-          params: {},
-        })
-        .then((data) => {
-          console.log(data.length);
-          alert(data);
-        })
-        .catch((err) => {
-          console.log(err);
-          alert(err);
-        });
+    openDialog(dialog_name) {
+      this[dialog_name] = true;
     },
   },
 };

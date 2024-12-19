@@ -20,7 +20,7 @@ export const actions = {
                 errObj.msg = err.response.data.msg;
                 errObj.code = err.response.status;
               } else {
-                errObj.msg = "ERROR.";
+                errObj.msg = "Server Error";
                 errObj.code = 0;
                 console.log(err);
               }
@@ -45,7 +45,7 @@ export const actions = {
                 errObj.code = err.response.status;
               } else {
                 console.log(err);
-                errObj.msg = "ERROR.";
+                errObj.msg = "Server Error";
                 errObj.code = 0;
               }
               reject(errObj);
@@ -93,7 +93,7 @@ export const actions = {
                 errObj.code = err.response.status;
               } else {
                 console.log(err);
-                errObj.msg = "ERROR.";
+                errObj.msg = "Server Error";
                 errObj.code = 0;
               }
               reject(errObj);
