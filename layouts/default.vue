@@ -1,5 +1,31 @@
 <template>
   <v-app dark v-resize="onResize">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      temporary
+      :style="`max-height: ${windowSize.height}px;`"
+    >
+      <v-list dense>
+        <v-list-item>
+          <v-icon class="ml-auto" @click="drawer = false">mdi-close</v-icon>
+        </v-list-item>
+        <v-list-item
+          class="custom-btn mt-2"
+          v-for="(item, idx2) in menus"
+          :key="idx2"
+          @click="scrollToSection(item.id)"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <span>{{ item.title }}</span>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
     <v-app-bar
       app
       fixed
@@ -13,6 +39,27 @@
       }`"
     >
       <span style="font-size: 20px; font-weight: 700">Kim_Portfolio</span>
+      <v-spacer></v-spacer>
+
+      <v-btn
+        v-for="(item, idx) in menus"
+        v-if="windowSize.width > 700"
+        :key="idx"
+        text
+        class="custom-btn"
+        @click="scrollToSection(item.id)"
+      >
+        <span>{{ item.title }}</span>
+      </v-btn>
+
+      <v-btn
+        v-if="windowSize.width <= 700"
+        text
+        class="custom-btn"
+        @click="drawer = true"
+      >
+        <v-icon color="#fff">mdi-menu</v-icon>
+      </v-btn>
     </v-app-bar>
     <!-- router -->
     <v-main v-if="onload" style="background-color: #141414">
@@ -57,33 +104,62 @@
 </template>
 
 <script>
+import { gsap } from "@/node_modules/gsap";
+import { ScrollToPlugin } from "@/node_modules/gsap/ScrollToPlugin";
+
 export default {
   components: {},
-  watch: {},
-  computed: {
-    processing() {
-      return this.$store.state.processing;
+  watch: {
+    windowSizeWidth(val) {
+      if (val > 700) {
+        this.drawer = false;
+      }
     },
+  },
+  computed: {
     windowSize() {
       return this.$store.state.windowSize;
+    },
+    windowSizeWidth() {
+      return this.$store.state.windowSize.width;
     },
     scrollY() {
       return this.$store.state.scrollY;
     },
-
-    processing_msg() {
-      return this.$store.state.processing_msg;
-    },
   },
   data() {
     return {
-      drawer: true,
+      drawer: false,
       onload: false,
       snackbar_error: false,
       snackbar_alert: false,
+      menus: [
+        {
+          id: "about_me",
+          title: "ABOUT ME",
+          icon: "mdi-run",
+        },
+        {
+          id: "skills",
+          title: "SKILLS",
+          icon: "mdi-laptop",
+        },
+        {
+          id: "career",
+          title: "CAREER",
+          icon: "mdi-hub",
+        },
+        {
+          id: "project",
+          title: "PROJECT",
+          icon: "mdi-file-code",
+        },
+      ],
     };
   },
   async mounted() {
+    // 스크롤 애니메이션
+    gsap.registerPlugin(ScrollToPlugin);
     this.onload = true;
     window.addEventListener("scroll", this.onScroll);
     document.body.style.backgroundColor = "#ffffff";
@@ -92,14 +168,29 @@ export default {
     window.removeEventListener("scroll", this.onScroll);
   },
   methods: {
+    //vuex scorll시 scroll 값을 저장
     onScroll(e) {
       this.$store.commit("setScroll", window.scrollY);
     },
+    //vuex resize시 window 값을 저장
     onResize() {
       this.$store.commit("onResize", {
         width: window.innerWidth,
         height: window.innerHeight,
       });
+    },
+    scrollToSection(id) {
+      this.drawer = false;
+      const section = document.getElementById(id);
+      if (section) {
+        var offset = 0;
+        var topPosition = section.offsetTop;
+
+        gsap.to(window, {
+          duration: 0.5,
+          scrollTo: { y: topPosition, offsetY: offset },
+        });
+      }
     },
   },
 };
@@ -127,5 +218,15 @@ export default {
   to {
     opacity: 1;
   }
+}
+
+.custom-btn {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+.custom-btn:hover {
+  color: yellow;
+  transform: scale(1.05);
 }
 </style>

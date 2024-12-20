@@ -97,6 +97,7 @@
     <!-- HERO -->
     <!-- ABOUT ME -->
     <v-row
+      id="about_me"
       no-gutters
       aling="center"
       justify="center"
@@ -287,6 +288,7 @@
     <!-- ABOUT ME -->
     <!-- SKILLS  -->
     <v-row
+      id="skills"
       no-gutters
       aling="center"
       justify="center"
@@ -723,6 +725,7 @@
     <!-- SKILLS  -->
     <!-- CAREER  -->
     <v-row
+      id="career"
       ref="career_here"
       no-gutters
       aling="center"
@@ -1044,11 +1047,14 @@
               </v-col>
             </v-row>
           </v-col>
-        </v-row> </v-col
-    ></v-row>
+        </v-row>
+      </v-col>
+      <v-col></v-col>
+    </v-row>
     <!-- CAREER  -->
     <!-- PROJECT  -->
     <v-row
+      id="project"
       no-gutters
       aling="center"
       justify="center"
@@ -1167,6 +1173,9 @@
 import CoupangReview from "@/components/CoupangReview";
 
 export default {
+  comments: {
+    CoupangReview: CoupangReview,
+  },
   components: {},
   watch: {
     windowSizeWidth(val) {

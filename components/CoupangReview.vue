@@ -109,8 +109,10 @@
                     <v-img
                       :src="img"
                       contain
-                      class="px-2"
+                      class="px-2 no-background-hover"
                       width="100"
+                      @click="scaleImg(img)"
+                      style="cursor: pointer"
                     ></v-img> </v-slide-item
                 ></v-slide-group>
               </v-col>
@@ -133,12 +135,22 @@
           </v-col>
         </v-row>
       </v-card-text>
+      <ImgScale
+        :dialog="detailImg"
+        :url="detailUrl"
+        @close="detailImg = false"
+      ></ImgScale>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import ImgScale from "@/components/ImgScale";
+
 export default {
+  comments: {
+    ImgScale: ImgScale,
+  },
   props: ["dialog"],
   computed: {},
   watch: {
@@ -147,6 +159,13 @@ export default {
         this.url = "";
         this.detailData = [];
         this.next = false;
+        this.detailImg = false;
+        this.detailUrl = "";
+      }
+    },
+    detailImg(val) {
+      if (!val) {
+        this.detailUrl = "";
       }
     },
   },
@@ -200,6 +219,9 @@ export default {
           value: "reviewAt",
         },
       ],
+
+      detailUrl: "",
+      detailImg: false,
     };
   },
   methods: {
@@ -229,6 +251,10 @@ export default {
     updatePage(num) {
       this.page = this.page + parseInt(num);
       this.getReview();
+    },
+    scaleImg(img) {
+      this.detailUrl = img;
+      this.detailImg = true;
     },
   },
 };
