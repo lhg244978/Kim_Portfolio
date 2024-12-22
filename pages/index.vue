@@ -505,7 +505,7 @@
                         ? 50
                         : 30
                     "
-                    src="/Develope_Skill_Icon/VueJs-Light.svg"
+                    src="/Develope_Skill_Icon/Vue.svg"
                     ref="vue"
                   ></v-img>
                   <v-img
@@ -532,7 +532,7 @@
                         ? 50
                         : 30
                     "
-                    src="/Develope_Skill_Icon/NuxtJS-Light.svg"
+                    src="/Develope_Skill_Icon/NuxtJS-Dark.svg"
                     ref="nuxt"
                   ></v-img
                 ></v-row>
@@ -564,7 +564,7 @@
                         ? 50
                         : 30
                     "
-                    src="/Develope_Skill_Icon/NodeJS-Light.svg"
+                    src="/Develope_Skill_Icon/NodeJS-Dark.svg"
                     ref="node"
                   ></v-img>
                   <v-img
@@ -591,7 +591,7 @@
                         ? 50
                         : 30
                     "
-                    src="/Develope_Skill_Icon/MYSQL-Light.svg"
+                    src="/Develope_Skill_Icon/MySQL-Dark.svg"
                     ref="mysql"
                   ></v-img>
                   <v-img
@@ -618,7 +618,7 @@
                         ? 50
                         : 30
                     "
-                    src="/Develope_Skill_Icon/Firebase-Light.svg"
+                    src="/Develope_Skill_Icon/Firebase-Dark.svg"
                     ref="firebase"
                   ></v-img>
                 </v-row>
@@ -650,7 +650,7 @@
                         ? 50
                         : 30
                     "
-                    src="/Develope_Skill_Icon/AWS-Light.svg"
+                    src="/Develope_Skill_Icon/AWS-Dark.svg"
                     ref="aws"
                   ></v-img>
                   <v-img
@@ -677,7 +677,7 @@
                         ? 50
                         : 30
                     "
-                    src="/Develope_Skill_Icon/Github-Light.svg"
+                    src="/Develope_Skill_Icon/Github-Dark.svg"
                     ref="git"
                   ></v-img>
                   <v-img
@@ -704,7 +704,7 @@
                         ? 50
                         : 30
                     "
-                    src="/Develope_Skill_Icon/Linux-Light.svg"
+                    src="/Develope_Skill_Icon/Linux-Dark.svg"
                     ref="linux"
                   ></v-img>
                 </v-row>
