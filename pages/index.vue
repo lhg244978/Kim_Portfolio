@@ -704,7 +704,7 @@
                         ? 50
                         : 30
                     "
-                    src="/Develope_Skill_Icon/linux.svg"
+                    src="/Develope_Skill_Icon/Linux-Light.svg"
                     ref="linux"
                   ></v-img>
                 </v-row>
