@@ -1358,9 +1358,9 @@ export default {
         for (var idx in this.develope_icon_id) {
           const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
           const max_div_width =
-            window.innerWidth > 1500
-              ? window.innerWidth - 1500 / 2 - 100
-              : window.innerWidth;
+            this.windowSizeWidth > 1500
+              ? this.windowSizeWidth - ((this.windowSizeWidth - 1500) / 2 + 50)
+              : this.windowSizeWidth;
 
           const maxX = max_div_width - img_ref.offsetWidth * 2;
           const maxY = 350;
@@ -1412,9 +1412,10 @@ export default {
 
             // 화면 경계를 벗어나지 않도록 제한
             const max_div_width =
-              window.innerWidth > 1500
-                ? window.innerWidth - 1500 / 2 - 100
-                : window.innerWidth;
+              this.windowSizeWidth > 1500
+                ? this.windowSizeWidth -
+                  ((this.windowSizeWidth - 1500) / 2 + 50)
+                : this.windowSizeWidth;
 
             const maxX = (max_div_width - moveimgRect.width) * 0.9;
             const maxY = 350;

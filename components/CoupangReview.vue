@@ -30,10 +30,18 @@
                 style="border: 1px #e0e0e0 solid; color: #000"
                 v-model="url"
                 outlined
-                append-icon="mdi-subdirectory-arrow-left"
-                @click:append="getReview"
                 hide-details
-              ></v-text-field>
+              >
+                <template v-slot:append>
+                  <v-icon
+                    size="24"
+                    color="#000"
+                    style="cursor: pointer"
+                    @click="getReview"
+                    >mdi-subdirectory-arrow-left</v-icon
+                  >
+                </template>
+              </v-text-field>
             </v-form>
           </v-col>
 
@@ -55,8 +63,10 @@
               {{ page }}
               <v-btn @click="updatePage(1)" icon :disabled="!next">
                 <v-icon color="#000">mdi-menu-right</v-icon>
-              </v-btn></v-row
-            >
+              </v-btn>
+              <v-btn class="ml-1" color="#099145" @click="getXlsx">XLSX</v-btn>
+              <v-btn class="ml-1" color="orange" @click="getJson">JSON</v-btn>
+            </v-row>
           </v-col>
           <v-col
             v-for="(data, idx) in detailData"
@@ -247,6 +257,70 @@ export default {
         .catch((err) => {
           alert(err.msg);
         });
+    },
+    getXlsx() {
+      if (this.detailData.length) {
+        var filename = this.detailData[0].itemName;
+        this.$store
+          .dispatch("api/axios", {
+            method: "POST",
+            uri: `/review/xlsx`,
+            params: {
+              jsondata: this.detailData,
+              filename,
+            },
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((retdata) => {
+            const base64String = retdata;
+            const binaryData = atob(base64String);
+            const binaryLength = binaryData.length;
+            const bytes = new Uint8Array(binaryLength);
+
+            for (let i = 0; i < binaryLength; i++) {
+              bytes[i] = binaryData.charCodeAt(i);
+            }
+
+            const blob = new Blob([bytes], {
+              type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            });
+
+            var url = window.URL.createObjectURL(blob);
+
+            // 다운로드 트리거
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = filename + ".xlsx";
+            document.body.appendChild(a);
+            a.click();
+
+            window.URL.revokeObjectURL(url);
+          })
+          .catch((err) => {
+            alert(err.msg);
+          });
+      } else {
+        alert("리뷰가 없습니다.");
+      }
+    },
+    getJson() {
+      if (this.detailData.length) {
+        var filename = this.detailData[0].itemName;
+        var jsonString = JSON.stringify(this.detailData, null, 2); // JSON을 보기 좋게 포맷팅
+
+        var blob = new Blob([jsonString], { type: "text/plain" });
+
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename + ".txt";
+        a.click();
+        window.URL.revokeObjectURL(url);
+      } else {
+        alert("리뷰가 없습니다.");
+      }
     },
     updatePage(num) {
       this.page = this.page + parseInt(num);
