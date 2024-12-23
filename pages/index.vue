@@ -1357,8 +1357,12 @@ export default {
       if (this.develope_shake) {
         for (var idx in this.develope_icon_id) {
           const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
+          const max_div_width =
+            window.innerWidth > 1500
+              ? window.innerWidth - 1500 / 2 - 100
+              : window.innerWidth;
 
-          const maxX = window.innerWidth - img_ref.offsetWidth * 2;
+          const maxX = max_div_width - img_ref.offsetWidth * 2;
           const maxY = 350;
 
           // 배열로 저장 후 clearinterval시 사용
@@ -1407,7 +1411,12 @@ export default {
             const newTop = img_ref.offsetTop + moveY;
 
             // 화면 경계를 벗어나지 않도록 제한
-            const maxX = (window.innerWidth - moveimgRect.width) * 0.9;
+            const max_div_width =
+              window.innerWidth > 1500
+                ? window.innerWidth - 1500 / 2 - 100
+                : window.innerWidth;
+
+            const maxX = (max_div_width - moveimgRect.width) * 0.9;
             const maxY = 350;
             img_ref.style.left = `${Math.min(Math.max(newLeft, 0), maxX)}px`;
             img_ref.style.top = `${Math.min(Math.max(newTop, 0), maxY)}px`;
