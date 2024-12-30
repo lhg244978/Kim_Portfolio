@@ -1166,20 +1166,42 @@
     >
     <!-- PROJECT  -->
     <CoupangReview :dialog="cr" @close="cr = false"></CoupangReview>
+    <Subway :dialog="sb" @close="sb = false"></Subway>
   </v-container>
 </template>
 
 <script>
 import CoupangReview from "@/components/CoupangReview";
+import Subway from "@/components/Subway";
 
 export default {
   comments: {
     CoupangReview: CoupangReview,
+    Subway: Subway,
   },
   components: {},
   watch: {
     windowSizeWidth(val) {
       //
+      setTimeout(() => {
+        var ua = navigator.userAgent.toLowerCase();
+
+        if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+          this.isMobile = true;
+        } else if (navigator.userAgent.toLowerCase().indexOf("mac os") > -1) {
+          if (ua.includes("macintosh")) {
+            this.isMobile = false;
+            this.userAgent = "MacBook";
+          } else if (ua.includes("iphone")) {
+            this.isMobile = true;
+          } else if (ua.includes("ipad")) {
+            this.isMobile = true;
+          }
+        } else {
+          this.isMobile = false;
+        }
+      }, 500);
+
       this.develope_shake = true;
       this.develope_shake = false;
       if (this.runCareer_step1) {
@@ -1248,6 +1270,31 @@ export default {
       } else {
       }
     },
+    isMobile(val) {
+      this.toyProject = [];
+      setTimeout(() => {
+        this.toyProject = [
+          {
+            name: "쿠팡 리뷰 가져오기",
+            cover: "cd_2",
+            cover_id: "toyproject_1",
+            dialog: "cr",
+          },
+          {
+            name: "지하철 실시간위치",
+            cover: "subway",
+            cover_id: "toyproject_2",
+            dialog: "sb",
+          },
+          {
+            name: "개발 중",
+            cover: "cd_1",
+            cover_id: "toyproject_3",
+            dialog: "none_dialog",
+          },
+        ];
+      }, 500);
+    },
   },
   filters: {},
   computed: {
@@ -1293,6 +1340,7 @@ export default {
       runCareer_step4: false,
       slide: "",
       cr: false,
+      sb: false,
       isMobile: false,
       toyProject: [
         {
@@ -1302,10 +1350,10 @@ export default {
           dialog: "cr",
         },
         {
-          name: "개발 중",
-          cover: "cd_1",
+          name: "지하철 실시간위치",
+          cover: "subway",
           cover_id: "toyproject_2",
-          dialog: "none_dialog",
+          dialog: "sb",
         },
         {
           name: "개발 중",
