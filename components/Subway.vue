@@ -201,7 +201,11 @@
                   >
                     <span>
                       {{ station.donwlinedata.trainNo }}열차
-                      {{ station.donwlinedata.statnNm }}
+                      {{
+                        station.donwlinedata.trainSttus == 0
+                          ? downName(idx)
+                          : station.donwlinedata.statnNm
+                      }}
                       {{
                         station.donwlinedata.trainSttus == 0
                           ? "진입"
@@ -432,6 +436,13 @@ export default {
           .catch((err) => {
             alert(err.msg);
           });
+      }
+    },
+    downName(idx) {
+      if (this.stations[idx + 1]) {
+        return this.stations[idx + 1].name;
+      } else {
+        return "-";
       }
     },
   },
