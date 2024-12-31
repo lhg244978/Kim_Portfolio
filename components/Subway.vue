@@ -75,11 +75,18 @@
                     class="down_train"
                   >
                     <v-icon
+                      v-if="station.downdata.statnTnm != '성수종착'"
                       size="16"
                       color="#fff"
                       :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px;`"
                       >mdi-chevron-down</v-icon
                     >
+                    <span
+                      v-else
+                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px; color:#fff`"
+                    >
+                      {{ station.downdata.updnLine == 0 ? "내" : "외" }}
+                    </span>
                   </v-btn>
 
                   <div
@@ -114,11 +121,19 @@
                     "
                   >
                     <v-icon
+                      v-if="station.updata.statnTnm != '성수종착'"
                       size="16"
                       color="#fff"
                       :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px;`"
                       >mdi-chevron-up</v-icon
                     >
+
+                    <span
+                      v-else
+                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px; color:#fff`"
+                    >
+                      {{ station.updata.updnLine == 0 ? "내" : "외" }}
+                    </span>
                   </v-btn>
 
                   <div
@@ -164,11 +179,18 @@
                     style="opacity: "
                   >
                     <v-icon
+                      v-if="station.donwlinedata.statnTnm != '성수종착'"
                       size="16"
                       color="#fff"
                       :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px;`"
-                      >mdi-chevron-down</v-icon
+                      >mdi-chevron-down
+                    </v-icon>
+                    <span
+                      v-else
+                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px; color:#fff`"
                     >
+                      {{ station.donwlinedata.updnLine == 0 ? "내" : "외" }}
+                    </span>
                   </v-btn>
                   <div
                     v-if="station.donwlinedata"
@@ -203,12 +225,20 @@
                     "
                   >
                     <v-icon
+                      v-if="station.uplinedata.statnTnm != '성수종착'"
                       size="16"
                       color="#fff"
                       :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px;`"
                       >mdi-chevron-up</v-icon
-                    ></v-btn
-                  >
+                    >
+                    <span
+                      v-else
+                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px; color:#fff`"
+                    >
+                      {{ station.uplinedata.updnLine == 0 ? "내" : "외" }}
+                    </span>
+                  </v-btn>
+
                   <div
                     v-if="station.uplinedata"
                     class="tooltip-upline"
@@ -371,9 +401,9 @@ export default {
               this.stations = retdata;
               this.station_height = this.stations.length * 54;
               this.getTrainInfo();
-              setInterval(() => {
-                this.getTrainInfo();
-              }, 11500);
+              // setInterval(() => {
+              //   this.getTrainInfo();
+              // }, 11500);
             }
           })
           .catch((err) => {
@@ -396,6 +426,7 @@ export default {
             var retdata = data;
             if (retdata) {
               this.stations = retdata;
+              console.log(retdata);
             }
           })
           .catch((err) => {
