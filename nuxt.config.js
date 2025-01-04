@@ -4,8 +4,8 @@ const { baseURL } = require("./config/server.json");
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - portfolio",
-    title: "portfolio",
+    titleTemplate: "%s - Portfolio",
+    title: "HyeonGeunKim",
     htmlAttrs: {
       lang: "ko",
     },
@@ -15,11 +15,11 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [{ rel: "icon", type: "image/x-icon", href: "/kp_icon.ico" }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["@/static/css/ui.css"],
+  css: ["@/static/css/ui.css", "@/static/font/sans.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],

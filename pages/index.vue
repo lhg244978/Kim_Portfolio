@@ -169,7 +169,7 @@ export default {
 
           // 화면에 iframe을 추가
           const iframeElement = document.createElement("iframe");
-          iframeElement.src = this.url + "/simple"; // 원하는 URL을 넣습니다.
+          iframeElement.src = this.url + "/screen"; // 원하는 URL을 넣습니다.
           iframeElement.style.width = "760px"; // iframe 크기
           iframeElement.style.height = "1600px";
           iframeElement.style.border = "none";
@@ -208,6 +208,7 @@ export default {
 
             if (intersects.length > 0 && !this.zoomedIn) {
               // 모델을 클릭하면 카메라가 가까워지도록 설정
+
               this.camera.position.z = Math.max(
                 this.camera.position.z - 1,
                 -0.5
@@ -218,6 +219,7 @@ export default {
               this.model.rotation.set(0, 0, 0); // 모델 회전 리셋하여 정면으로
               // `mousemove` 이벤트 리스너를 제거하여 모델 회전을 비활성화
               this.tooltipVisible = false;
+
               container.removeEventListener("mousemove", this.mousemoveE);
             } else if (intersects.length === 0 && this.zoomedIn) {
               // 모델 밖을 클릭하면 원래 줌 상태로 돌아가고 `mousemove` 이벤트를 다시 추가
