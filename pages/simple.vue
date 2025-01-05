@@ -1329,7 +1329,7 @@ export default {
         "git",
         "linux",
       ],
-      stepnum: 1,
+
       carrer_project_height_start: 0,
 
       carrer_project_height: 0,

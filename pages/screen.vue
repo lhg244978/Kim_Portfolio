@@ -204,6 +204,7 @@
                   width="90"
                   height="90"
                   style="border-radius: 20px"
+                  @click="sk = true"
                 >
                   <v-icon color="#000" size="60">mdi-head-cog</v-icon>
                 </v-btn>
@@ -258,8 +259,10 @@
         >
       </v-col>
     </v-row>
-    <CoupangReviewP :dialog="cr" @close="cr = false"></CoupangReviewP>
     <AboutmeP :dialog="ap" @close="ap = false"></AboutmeP>
+    <SkillsP :dialog="sk" @close="sk = false"></SkillsP>
+    <CareerP :dialog="ap" @close="ap = false"></CareerP>
+    <CoupangReviewP :dialog="cr" @close="cr = false"></CoupangReviewP>
     <Subway :dialog="sb" @close="sb = false"></Subway>
   </v-container>
 </template>
@@ -267,6 +270,8 @@
 <script>
 import CoupangReviewP from "@/components/CoupangReviewP";
 import AboutmeP from "@/components/AboutmeP";
+import CareerP from "@/components/CareerP";
+import SkillsP from "@/components/SkillsP";
 import Subway from "@/components/Subway";
 export default {
   layout: "phone",
@@ -274,6 +279,8 @@ export default {
     CoupangReviewP: CoupangReviewP,
     Subway: Subway,
     AboutmeP: AboutmeP,
+    CareerP: CareerP,
+    SkillsP: SkillsP,
   },
   computed: {
     windowSize() {
@@ -322,7 +329,7 @@ export default {
   },
   data() {
     return {
-      //black_home: true,
+      // black_home: true,
       // on: true,
       // start: false,
       // lock: false,
@@ -341,6 +348,8 @@ export default {
       onInterval: null,
 
       cr: false,
+      sk: false,
+      ca: false,
       sb: false,
       ap: false,
 
