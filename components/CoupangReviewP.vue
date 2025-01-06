@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="dialog" scrollable persistent fullscreen>
-    <v-card color="#fff" flat style="border-radius: 10px">
+    <v-card color="#fff" flat style="border-radius: 0px">
       <v-card-title class="pa-10 pt-15">
         <v-btn class="mr-auto" icon @click="$emit('close')">
           <v-icon size="48" color="#000">mdi-chevron-left</v-icon>

@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="dialog" scrollable persistent fullscreen>
-    <v-card v-if="start" color="#526273" flat style="border-radius: 10px">
+    <v-card v-if="start" color="#526273" flat style="border-radius: 0px">
       <v-card-title class="pa-10 pt-15">
         <v-btn class="mr-auto" icon @click="$emit('close')">
           <v-icon size="48" color="#fff">mdi-chevron-left</v-icon>
@@ -32,7 +32,7 @@
         </v-row>
       </v-card-text>
     </v-card>
-    <v-card v-else color="#526273" flat style="border-radius: 10px">
+    <v-card v-else color="#526273" flat style="border-radius: 0px">
       <v-card-title class="pa-10 pt-15">
         <v-btn class="mr-auto" icon @click="$emit('close')">
           <v-icon size="48" color="#fff">mdi-chevron-left</v-icon>
@@ -610,37 +610,39 @@ export default {
       }
     },
     shakeIcon(e) {
-      if (this.develope_shake && this.dialog) {
-        for (var idx in this.develope_icon_id) {
-          const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
+      if (this.develope_shake) {
+        if (this.dialog) {
+          for (var idx in this.develope_icon_id) {
+            const img_ref = this.$refs[this.develope_icon_id[idx]].$el;
 
-          const moveimgRect = img_ref.getBoundingClientRect();
-          let threshold = 150;
+            const moveimgRect = img_ref.getBoundingClientRect();
+            let threshold = 150;
 
-          const imgX = moveimgRect.left + moveimgRect.width / 2;
-          const imgY = moveimgRect.top + moveimgRect.height / 2;
+            const imgX = moveimgRect.left + moveimgRect.width / 2;
+            const imgY = moveimgRect.top + moveimgRect.height / 2;
 
-          const distanceX = e.clientX - imgX;
-          const distanceY = e.clientY - imgY;
-          const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
-          if (distance < threshold) {
-            const angle = Math.atan2(distanceY, distanceX);
-            const moveX = -Math.cos(angle) * (threshold - distance);
-            const moveY = -Math.sin(angle) * (threshold - distance);
+            const distanceX = e.clientX - imgX;
+            const distanceY = e.clientY - imgY;
+            const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
+            if (distance < threshold) {
+              const angle = Math.atan2(distanceY, distanceX);
+              const moveX = -Math.cos(angle) * (threshold - distance);
+              const moveY = -Math.sin(angle) * (threshold - distance);
 
-            const newLeft = img_ref.offsetLeft + moveX;
-            const newTop = img_ref.offsetTop + moveY;
+              const newLeft = img_ref.offsetLeft + moveX;
+              const newTop = img_ref.offsetTop + moveY;
 
-            // 화면 경계를 벗어나지 않도록 제한
-            const max_div_width =
-              this.windowSizeWidth > 760
-                ? this.windowSizeWidth - (this.windowSizeWidth - 760) / 2
-                : this.windowSizeWidth;
+              // 화면 경계를 벗어나지 않도록 제한
+              const max_div_width =
+                this.windowSizeWidth > 760
+                  ? this.windowSizeWidth - (this.windowSizeWidth - 760) / 2
+                  : this.windowSizeWidth;
 
-            const maxX = (max_div_width - moveimgRect.width) * 0.9;
-            const maxY = 600;
-            img_ref.style.left = `${Math.min(Math.max(newLeft, 0), maxX)}px`;
-            img_ref.style.top = `${Math.min(Math.max(newTop, 0), maxY)}px`;
+              const maxX = (max_div_width - moveimgRect.width) * 0.9;
+              const maxY = 600;
+              img_ref.style.left = `${Math.min(Math.max(newLeft, 0), maxX)}px`;
+              img_ref.style.top = `${Math.min(Math.max(newTop, 0), maxY)}px`;
+            }
           }
         }
       }

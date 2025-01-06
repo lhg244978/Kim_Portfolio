@@ -20,6 +20,28 @@
           >
         </transition>
       </v-col>
+      <v-col cols="12" class="text-center">
+        <transition name="fade">
+          <v-btn
+            v-if="onButton"
+            class="mr-1"
+            color="#fff"
+            style="color: #000; font-size: 24px"
+            @click="start = false"
+            >3D version</v-btn
+          >
+        </transition>
+        <transition name="fade">
+          <v-btn
+            v-if="onButton"
+            class="ml-1"
+            color="yellow"
+            style="color: #000; font-size: 24px"
+            @click="$router.push('simple')"
+            >Simple version</v-btn
+          >
+        </transition>
+      </v-col>
     </v-row>
     <div
       v-else
@@ -56,6 +78,14 @@ export default {
       return this.$store.state.windowSize.width;
     },
   },
+  watch: {
+    async start(val) {
+      if (!val) {
+        await this.delay(1000);
+        await this.init3DModel();
+      }
+    },
+  },
   data() {
     return {
       model: null,
@@ -64,6 +94,7 @@ export default {
       url,
 
       start: true,
+      onButton: false,
       progress_circular: 0,
 
       fade_circular: false,
@@ -309,10 +340,9 @@ export default {
           await this.delay(1000);
           this.fade_circular = true;
           await this.delay(1000);
-          this.start = false;
+          this.onButton = true;
 
           await this.delay(1000);
-          await this.init3DModel();
         }
       }
     },

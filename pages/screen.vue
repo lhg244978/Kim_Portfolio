@@ -133,23 +133,24 @@
           <v-col cols="3" class="d-flex px-4">
             <v-icon class="mx-auto" size="36">mdi-wifi</v-icon>
             <v-icon class="mx-auto" size="36">mdi-network-strength-3</v-icon>
-            <div
+
+            <v-row
+              no-gutters
+              align="center"
+              justify="center"
+              class="fill-height"
               style="
-                width: 56px;
+                color: #fff;
+                font-weight: 800;
+                background-color: #33fe33;
+                max-width: 56px;
                 height: 36px;
                 border: 6px solid #fff;
                 border-radius: 10px;
               "
             >
-              <v-row
-                no-gutters
-                align="center"
-                justify="center"
-                style="color: #fff; font-weight: 800"
-              >
-                72
-              </v-row>
-            </div>
+              100
+            </v-row>
           </v-col>
         </v-row>
       </v-col>
@@ -215,6 +216,7 @@
                   width="90"
                   height="90"
                   style="border-radius: 20px"
+                  @click="ca = true"
                 >
                   <v-icon color="#fff" size="60">mdi-stairs-up</v-icon>
                 </v-btn>
@@ -225,6 +227,7 @@
                   width="90"
                   height="90"
                   style="border-radius: 20px"
+                  @click="nop = true"
                 >
                   <v-icon color="#000" size="60">mdi-note-edit-outline</v-icon>
                 </v-btn>
@@ -237,11 +240,11 @@
         <v-bottom-sheet fullscreen v-model="detail" persistent>
           <v-sheet
             class="d-flex flex-column justify-center align-center"
-            :style="`max-width: 760px; height: ${windowSize.height}px; margin: 0 auto;  background-color: rgba(255, 255, 255, 0.3)`"
+            :style="`max-width: 760px; height: ${windowSize.height}px; margin: 0 auto;  background-color: rgba(255, 255, 255, 0.5);  backdrop-filter: blur(10px);-webkit-backdrop-filter: blur(10px);`"
           >
             <v-row
               no-gutters
-              class="fill-height"
+              class="fill-height pa-10"
               style="width: 100%"
               @touchstart="onTouchStart"
               @touchmove="onTouchMove"
@@ -250,9 +253,64 @@
               @mouseup="onMouseUp"
               @mouseleave="onMouseUp"
             >
-              <v-col cols="12" :style="`height: ${100}px;`">1 </v-col>
-              <v-col cols="12" :style="`height: ${windowSize.height - 100}px;`"
-                >1
+              <v-col cols="12" :style="`height: ${100}px;`">
+                <v-text-field
+                  outlined
+                  hide-details
+                  class="centered-input"
+                  style="
+                    border-radius: 20px;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    font-size: 24px;
+                  "
+                  label="111"
+                  height="74"
+                  color="#fff"
+                  single-line
+                  ><template v-slot:label>
+                    <v-row
+                      no-gutters
+                      class="mt-2"
+                      align="center"
+                      style="font-size: 24px"
+                    >
+                      <span>
+                        <v-icon
+                          style="color: rgba(255, 255, 255, 0.7)"
+                          size="34"
+                        >
+                          mdi-magnify
+                        </v-icon>
+                        앱 라이브러리
+                      </span>
+                    </v-row>
+                  </template>
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" :style="`height: ${windowSize.height - 100}px;`">
+                <v-row no-gutters align="center">
+                  <v-col
+                    cols="3"
+                    class="text-center pa-1 mb-2"
+                    v-for="(item, idx) in detailApp"
+                    :key="idx"
+                  >
+                    <v-btn
+                      class="mb-2"
+                      width="100"
+                      height="100"
+                      :color="item.btn_color"
+                      style="border-radius: 20px"
+                      @click="dialogIn(item.dialog)"
+                    >
+                      <v-icon :color="item.icon_color" size="80"
+                        >mdi-{{ item.icon }}</v-icon
+                      >
+                    </v-btn>
+
+                    <p class="ma-0">{{ item.name }}</p>
+                  </v-col>
+                </v-row>
               </v-col>
             </v-row>
           </v-sheet></v-bottom-sheet
@@ -261,9 +319,10 @@
     </v-row>
     <AboutmeP :dialog="ap" @close="ap = false"></AboutmeP>
     <SkillsP :dialog="sk" @close="sk = false"></SkillsP>
-    <CareerP :dialog="ap" @close="ap = false"></CareerP>
+    <CareerP :dialog="ca" @close="ca = false"></CareerP>
+    <NoteP :dialog="nop" @close="nop = false"></NoteP>
     <CoupangReviewP :dialog="cr" @close="cr = false"></CoupangReviewP>
-    <Subway :dialog="sb" @close="sb = false"></Subway>
+    <SubwayP :dialog="sb" @close="sb = false"></SubwayP>
   </v-container>
 </template>
 
@@ -272,15 +331,17 @@ import CoupangReviewP from "@/components/CoupangReviewP";
 import AboutmeP from "@/components/AboutmeP";
 import CareerP from "@/components/CareerP";
 import SkillsP from "@/components/SkillsP";
-import Subway from "@/components/Subway";
+import NoteP from "@/components/NoteP";
+import SubwayP from "@/components/SubwayP";
 export default {
   layout: "phone",
   comments: {
     CoupangReviewP: CoupangReviewP,
-    Subway: Subway,
+    SubwayP: SubwayP,
     AboutmeP: AboutmeP,
     CareerP: CareerP,
     SkillsP: SkillsP,
+    NoteP: NoteP,
   },
   computed: {
     windowSize() {
@@ -329,19 +390,19 @@ export default {
   },
   data() {
     return {
-      // black_home: true,
-      // on: true,
-      // start: false,
-      // lock: false,
-      // home: false,
-      // detail: false,
-
-      black_home: false,
-      on: false,
+      black_home: true,
+      on: true,
       start: false,
       lock: false,
-      home: true,
+      home: false,
       detail: false,
+
+      // black_home: false,
+      // on: false,
+      // start: false,
+      // lock: false,
+      // home: true,
+      // detail: false,
 
       start_value: 0,
       currentTime: new Date(),
@@ -350,8 +411,60 @@ export default {
       cr: false,
       sk: false,
       ca: false,
+      nop: false,
       sb: false,
       ap: false,
+
+      detailApp: [
+        {
+          name: "소개",
+          icon: "information",
+          icon_color: "#fff",
+          btn_color: "#33fe33",
+          img: "",
+          dialog: "ap",
+        },
+        {
+          name: "스킬",
+          icon: "head-cog",
+          icon_color: "#000",
+          btn_color: "#d7d9da",
+          img: "",
+          dialog: "sk",
+        },
+        {
+          name: "커리어",
+          icon: "stairs-up",
+          icon_color: "#fff",
+          btn_color: "#1ba8f8",
+          img: "",
+          dialog: "ca",
+        },
+        {
+          name: "메모",
+          icon: "note-edit-outline",
+          icon_color: "#000",
+          btn_color: "#ffe536",
+          img: "",
+          dialog: "nop",
+        },
+        {
+          name: "쿠팡리뷰",
+          icon: "language-c",
+          icon_color: "#fff",
+          btn_color: "#db3123",
+          img: "",
+          dialog: "cr",
+        },
+        {
+          name: "실시간 지하철",
+          icon: "subway-variant",
+          icon_color: "#3ca4ff",
+          btn_color: "#171f31",
+          img: "",
+          dialog: "sb",
+        },
+      ],
 
       isTouch: false, // 터치 여부
       isDragging: false, // 드래그 상태
@@ -505,6 +618,9 @@ export default {
         }
       }
     },
+    dialogIn(dialog) {
+      this[dialog] = true;
+    },
   },
 };
 </script>
@@ -526,6 +642,14 @@ export default {
   pointer-events: none; /* 클릭 방지 */
   transform: translate(-50%, -50%); /* 마우스 중심 맞추기 */
   transition: transform 0.1s ease-out; /* 부드러운 움직임 */
+}
+.v-text-field.centered-input .v-label {
+  left: 50% !important;
+  height: 100%;
+  transform: translateX(-50%);
+  & .v-label--active {
+    transform: translateY(-18px) scale(0.75) translateX(-50%);
+  }
 }
 
 html,

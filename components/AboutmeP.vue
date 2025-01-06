@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="dialog" scrollable persistent fullscreen>
-    <v-card v-if="start" color="#f3f2f8" flat style="border-radius: 10px">
+    <v-card v-if="start" color="#f3f2f8" flat style="border-radius: 0px">
       <v-card-title class="pa-10 pt-15">
         <v-btn class="mr-auto" icon @click="$emit('close')">
           <v-icon size="48" color="#000">mdi-chevron-left</v-icon>
@@ -32,7 +32,7 @@
         </v-row>
       </v-card-text>
     </v-card>
-    <v-card v-else color="#f3f2f8" flat style="border-radius: 10px">
+    <v-card v-else color="#f3f2f8" flat style="border-radius: 0px">
       <v-card-title class="pa-10 pt-15">
         <v-btn class="mr-auto" icon @click="$emit('close')">
           <v-icon size="48" color="#000">mdi-chevron-left</v-icon>
