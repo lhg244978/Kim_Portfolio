@@ -26,7 +26,7 @@
               <v-icon color="#000" size="60">mdi-note-edit-outline</v-icon>
             </v-btn>
             <p class="mb-0 mt-10" style="font-size: 30px; color: #000">
-              개발중입니다.
+              메모입니다.
             </p>
           </v-col>
         </v-row>
@@ -114,8 +114,8 @@
                       -webkit-box-orient: vertical;
                       overflow: hidden;
                       text-overflow: ellipsis;
-                      min-height: 120px;
-                      max-height: 120px;
+                      min-height: 125px;
+                      max-height: 125px;
                     "
                   ></p>
                   <p class="text-right" style="color: #000">
