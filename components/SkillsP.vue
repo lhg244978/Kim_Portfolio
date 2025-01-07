@@ -59,13 +59,15 @@
                     cols="12"
                     v-if="develope_shake"
                     class="text-center"
-                    style="color: #fff; font-size: 14px; font-weight: 600"
+                    style="color: #fff; font-size: 24px; font-weight: 600"
                   >
                     클릭하면 아이콘이 도망가요~
                   </v-col>
                   <v-btn
-                    class="ml-auto"
+                    class="ml-auto pa-5"
                     @click="develope_shake = !develope_shake"
+                    :color="`${develope_shake ? 'red' : ''} `"
+                    style="color: #fff; font-size: 24px; font-weight: 600"
                     >{{ develope_shake ? "STOP" : "SHAKE" }}</v-btn
                   >
                 </v-row>
@@ -75,7 +77,7 @@
                   align="center"
                   justify="center"
                   :style="`color:#fff;font-size:${
-                    windowSize.width > 760 ? 34 : 28
+                    windowSize.width > 760 ? 48 : 34
                   }px; font-weight:700; position: relative; height: 400px`"
                 >
                   <v-col class="d-flex" cols="12">

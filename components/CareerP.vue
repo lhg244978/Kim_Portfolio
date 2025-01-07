@@ -40,17 +40,18 @@
       </v-card-title>
       <v-card-text class="py-5 px-10"
         ><v-row no-gutters align="center">
-          <v-col
-            cols="12"
-            md="3"
-            :style="` color:#1ba8f8; font-size:${
-              windowSize.width > 1200 ? 34 : 24
-            }px; font-weight:900; `"
-          >
-            <span>(주) 위드라이브</span>
+          <v-col cols="12" md="3">
+            <p
+              class="text-center mb-0"
+              :style="` color:#000; font-size:${
+                windowSize.width > 1200 ? 44 : 34
+              }px; font-weight:900; `"
+            >
+              (주) 위드라이브
+            </p>
             <v-card
-              class="mx-auto mt-5 mb-10"
-              max-width="100"
+              class="mx-auto mt-10 mb-10"
+              max-width="200"
               flat
               style="border-radius: 50%"
             >
@@ -62,7 +63,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col cols="12" md="9" class="d-flex">
+          <v-col cols="12" md="9" class="d-flex" style="line-height: 1.5">
             <v-row no-gutters>
               <v-col cols="1" class="fadeinEffect" v-if="runCareer_step1">
                 <div class="career-circle"></div>
@@ -78,14 +79,14 @@
                 style="color: #1ba8f8"
                 ><p
                   ref="carrer_project_start"
-                  style="font-size: 16px; font-weight: 500"
+                  style="font-size: 26px; font-weight: 500"
                 >
-                  <span style="font-size: 16px; font-weight: 900"
-                    >주식회사 위드라이브</span
-                  >
+                  <span style="font-weight: 900">주식회사 위드라이브</span>
                   <br />
-                  2021.09 ~ 2024.07 대중교통, 자차 등의 모든 이동이 포인트로
-                  쌓이는 앱테크서비스
+                  <span style="font-size: 20px">
+                    2021.09 ~ 2024.07 대중교통, 자차 등의 모든 이동이 포인트로
+                    쌓이는 앱테크서비스</span
+                  >
                 </p>
               </v-col>
               <v-col cols="1" class="fadeinEffect" v-if="runCareer_step2">
@@ -97,7 +98,7 @@
                 v-if="runCareer_step2"
                 class="fadeinEffect text-left pl-5"
                 style="color: #1ba8f8"
-                ><span style="font-size: 16px; font-weight: 900">
+                ><span style="font-size: 26px; font-weight: 900">
                   주요업무
                 </span>
                 <br />
@@ -106,7 +107,7 @@
                   color="#1ba8f8"
                   :style="`${
                     windowSize.width > 500
-                      ? ''
+                      ? 'font-size:20px;'
                       : 'height:20px !important; font-size:12px'
                   }`"
                   >Front-End</v-chip
@@ -116,7 +117,7 @@
                   color="#1ba8f8"
                   :style="`${
                     windowSize.width > 500
-                      ? ''
+                      ? 'font-size:20px;'
                       : 'height:20px !important; font-size:12px'
                   }`"
                   >Back-End</v-chip
@@ -126,7 +127,7 @@
                   color="#1ba8f8"
                   :style="`${
                     windowSize.width > 500
-                      ? ''
+                      ? 'font-size:20px;'
                       : 'height:20px !important; font-size:12px'
                   }`"
                   >DBA</v-chip
@@ -141,7 +142,7 @@
                 v-if="runCareer_step3"
                 class="fadeinEffect text-left pl-5"
                 style="color: #1ba8f8"
-                ><span style="font-size: 16px; font-weight: 900">
+                ><span style="font-size: 22px; font-weight: 900">
                   업무 내 사용기술
                 </span>
                 <br />
@@ -150,7 +151,7 @@
                   color="#1ba8f8"
                   :style="`${
                     windowSize.width > 500
-                      ? ''
+                      ? 'font-size:20px;'
                       : 'height:20px !important; font-size:12px'
                   }`"
                 >
@@ -161,7 +162,7 @@
                   color="#1ba8f8"
                   :style="`${
                     windowSize.width > 500
-                      ? ''
+                      ? 'font-size:20px;'
                       : 'height:20px !important; font-size:12px'
                   }`"
                 >
@@ -172,7 +173,7 @@
                   color="#1ba8f8"
                   :style="`${
                     windowSize.width > 500
-                      ? ''
+                      ? 'font-size:20px;'
                       : 'height:20px !important; font-size:12px'
                   }`"
                 >
@@ -183,7 +184,7 @@
                   color="#1ba8f8"
                   :style="`${
                     windowSize.width > 500
-                      ? ''
+                      ? 'font-size:20px;'
                       : 'height:20px !important; font-size:12px'
                   }`"
                 >
@@ -194,7 +195,7 @@
                   color="#1ba8f8"
                   :style="`${
                     windowSize.width > 500
-                      ? ''
+                      ? 'font-size:20px;'
                       : 'height:20px !important; font-size:12px'
                   }`"
                 >
@@ -205,7 +206,7 @@
                   color="#1ba8f8"
                   :style="`${
                     windowSize.width > 500
-                      ? ''
+                      ? 'font-size:20px;'
                       : 'height:20px !important; font-size:12px'
                   }`"
                 >
@@ -225,16 +226,16 @@
                 class="fadeinEffect text-left pl-5"
                 style="color: #1ba8f8"
                 ><span
-                  style="font-size: 16px; font-weight: 900; margin-bottom: 10px"
+                  style="font-size: 26px; font-weight: 900; margin-bottom: 10px"
                 >
                 </span>
                 <br />
-                <span style="font-size: 16px; font-weight: 900">
+                <span style="font-size: 26px; font-weight: 900">
                   주요 프로젝트 및 성과
                 </span>
                 <ol class="mt-3" ref="carrer_project">
-                  <li style="font-size: 14px; font-weight: 400">
-                    <span style="font-size: 14px; font-weight: 700"
+                  <li style="font-size: 20px; font-weight: 400">
+                    <span style="font-size: 22px; font-weight: 700"
                       >쇼핑몰 개발 및 운영</span
                     >
                     <br />
@@ -247,8 +248,8 @@
                     창출
                   </li>
 
-                  <li style="font-size: 14px; font-weight: 400">
-                    <span style="font-size: 14px; font-weight: 700"
+                  <li style="font-size: 20px; font-weight: 400">
+                    <span style="font-size: 22px; font-weight: 700"
                       >사내 관리 시스템 신규개발</span
                     >
                     <br />
@@ -258,8 +259,8 @@
                     직원에게도 어색하지않도록 개발하여 관리시스템 효율 향상을
                     가져옴
                   </li>
-                  <li style="font-size: 14px; font-weight: 400">
-                    <span style="font-size: 14px; font-weight: 700"
+                  <li style="font-size: 20px; font-weight: 400">
+                    <span style="font-size: 22px; font-weight: 700"
                       >땡큐캠페인 개발
                     </span>
                     <br />
@@ -271,8 +272,8 @@
                     졸음운전 사고 건수 15% 감소 (한국도로공사 통계 기반)
                     위드라이브 앱 다운로드 수 30% 증가.
                   </li>
-                  <li style="font-size: 14px; font-weight: 400">
-                    <span style="font-size: 14px; font-weight: 700"
+                  <li style="font-size: 20px; font-weight: 400">
+                    <span style="font-size: 22px; font-weight: 700"
                       >사용자 이벤트 개발
                     </span>
                     <br />
@@ -374,7 +375,7 @@ export default {
       await this.delay(100);
       if (this.$refs.carrer_project) {
         this.carrer_project_height =
-          this.$refs.carrer_project.offsetHeight + 50;
+          this.$refs.carrer_project.offsetHeight + 100;
       }
     },
     delay(time) {
@@ -389,7 +390,7 @@ export default {
 <style>
 .dotted-divider {
   border: dotted #1ba8f8;
-  height: 85px;
+  height: 105px;
   width: 1px;
   border-left-width: 0px;
   margin-top: 3px;
@@ -429,5 +430,8 @@ export default {
   -moz-animation: fadein 1s; /* Firefox */
   -webkit-animation: fadein 1s; /* Safari and Chrome */
   -o-animation: fadein 1s; /* Opera */
+}
+li {
+  margin-bottom: 15px;
 }
 </style>

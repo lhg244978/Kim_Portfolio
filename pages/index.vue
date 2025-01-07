@@ -240,10 +240,10 @@ export default {
             if (intersects.length > 0 && !this.zoomedIn) {
               // 모델을 클릭하면 카메라가 가까워지도록 설정
 
-              this.camera.position.z = Math.max(
-                this.camera.position.z - 1,
-                -0.5
-              ); // 최소 z 값 제한
+              this.camera.position.z = 1.8; // 최소 z 값 제한
+
+              this.camera.updateProjectionMatrix();
+
               this.zoomedIn = true;
               css3DObject.element.style.pointerEvents = "auto";
 
@@ -304,9 +304,14 @@ export default {
         const intersects = this.raycaster.intersectObject(this.model);
 
         if (intersects.length > 0) {
-          this.tooltipVisible = true;
-          this.tooltipStyle.left = `${event.clientX + 15}px`;
-          this.tooltipStyle.top = `${event.clientY + 15}px`;
+          if (!this.zoomedIn) {
+            this.tooltipVisible = true;
+            this.tooltipStyle.left = `${event.clientX + 15}px`;
+            this.tooltipStyle.top = `${event.clientY + 15}px`;
+          } else {
+            this.tooltipVisible = false;
+            // 2번 처리
+          }
         } else {
           this.tooltipVisible = false;
         }

@@ -48,11 +48,11 @@
             >
           </transition>
           <transition name="fade">
-            <v-col v-if="start" cols="12" class="px-10">
+            <v-col v-if="start" cols="12" class="px-15">
               <v-img
-                class="mx-auto"
-                width="200"
-                height="200"
+                class="mx-auto mb-10"
+                width="300"
+                height="300"
                 src="/img/kp_icon.png"
                 contain
               >
@@ -61,6 +61,8 @@
               <v-progress-linear
                 v-if="start"
                 color="#fff"
+                class="mx-auto"
+                style="max-width: 400px; border-radius: 20px"
                 :value="start_value"
               ></v-progress-linear>
             </v-col>
@@ -115,22 +117,20 @@
       <v-col
         v-if="home"
         cols="12"
-        style="height: 50px; position: absolute; top: 0"
+        style="height: 100px; position: absolute; top: 0"
       >
-        <v-row class="fill-height pt-5 px-4 aggro" no-gutters align="center">
-          <v-col
-            cols="3"
-            class="text-center"
-            style="color: #fff; font-weight: 800; font-size: 30px"
-          >
-            <span>{{ formattedTime }}</span>
+        <v-row class="fill-height pt-15 px-10 aggro" no-gutters align="center">
+          <v-col cols="3" class="text-center">
+            <span style="color: #fff; font-weight: 700; font-size: 30px">{{
+              formattedTime
+            }}</span>
           </v-col>
           <v-col
             class="fill-height"
             cols="6"
             style="background-color: #000; border-radius: 40px"
           ></v-col>
-          <v-col cols="3" class="d-flex px-4">
+          <v-col cols="3" class="d-flex px-0">
             <v-icon class="mx-auto" size="36">mdi-wifi</v-icon>
             <v-icon class="mx-auto" size="36">mdi-network-strength-3</v-icon>
 
@@ -157,7 +157,7 @@
       <v-col
         v-if="home"
         cols="12"
-        :style="`height:${windowSize.height - 190}px; padding-top:60px`"
+        :style="`height:${windowSize.height - 260}px; padding-top:100px`"
         @touchstart="onTouchStart"
         @touchmove="onTouchMove"
         @mousedown="onMouseDown"
@@ -169,7 +169,7 @@
         v-if="home"
         class="pb-5"
         cols="12"
-        style="height: 150px"
+        style="height: 170px"
         @touchstart="onTouchStart"
         @touchmove="onTouchMove"
         @mousedown="onMouseDown"
@@ -183,7 +183,7 @@
             class="fill-height mx-auto"
             style="
               background-color: rgba(255, 255, 255, 0.3);
-              width: 80%;
+
               border-radius: 70px;
             "
           >
@@ -191,45 +191,45 @@
               <v-col cols="3" class="pa-4 text-center">
                 <v-btn
                   color="#33fe33"
-                  width="90"
-                  height="90"
+                  width="100"
+                  height="100"
                   style="border-radius: 20px"
                   @click="ap = true"
                 >
-                  <v-icon size="60">mdi-information</v-icon>
+                  <v-icon size="80">mdi-information</v-icon>
                 </v-btn>
               </v-col>
               <v-col cols="3" class="pa-4 text-center">
                 <v-btn
                   color="#d7d9da"
-                  width="90"
-                  height="90"
+                  width="100"
+                  height="100"
                   style="border-radius: 20px"
                   @click="sk = true"
                 >
-                  <v-icon color="#000" size="60">mdi-head-cog</v-icon>
+                  <v-icon color="#000" size="80">mdi-head-cog</v-icon>
                 </v-btn>
               </v-col>
               <v-col cols="3" class="pa-4 text-center">
                 <v-btn
                   color="#1ba8f8"
-                  width="90"
-                  height="90"
+                  width="100"
+                  height="100"
                   style="border-radius: 20px"
                   @click="ca = true"
                 >
-                  <v-icon color="#fff" size="60">mdi-stairs-up</v-icon>
+                  <v-icon color="#fff" size="80">mdi-stairs-up</v-icon>
                 </v-btn>
               </v-col>
               <v-col cols="3" class="pa-4 text-center">
                 <v-btn
                   color="#ffe536"
-                  width="90"
-                  height="90"
+                  width="100"
+                  height="100"
                   style="border-radius: 20px"
                   @click="nop = true"
                 >
-                  <v-icon color="#000" size="60">mdi-note-edit-outline</v-icon>
+                  <v-icon color="#000" size="80">mdi-note-edit-outline</v-icon>
                 </v-btn>
               </v-col>
             </v-row>
@@ -261,18 +261,19 @@
                   style="
                     border-radius: 20px;
                     background-color: rgba(0, 0, 0, 0.5);
-                    font-size: 24px;
+                    font-size: 26px;
                   "
                   label="111"
                   height="74"
                   color="#fff"
                   single-line
+                  v-model="search"
                   ><template v-slot:label>
                     <v-row
                       no-gutters
                       class="mt-2"
                       align="center"
-                      style="font-size: 24px"
+                      style="font-size: 26px"
                     >
                       <span>
                         <v-icon
@@ -293,22 +294,30 @@
                     cols="3"
                     class="text-center pa-1 mb-2"
                     v-for="(item, idx) in detailApp"
+                    v-if="searchMenu(item)"
                     :key="idx"
                   >
                     <v-btn
                       class="mb-2"
-                      width="100"
-                      height="100"
+                      width="110"
+                      height="110"
                       :color="item.btn_color"
                       style="border-radius: 20px"
+                      :id="item.name"
                       @click="dialogIn(item.dialog)"
+                      @contextmenu.prevent="detailRightClick"
                     >
-                      <v-icon :color="item.icon_color" size="80"
+                      <v-icon :color="item.icon_color" size="90"
                         >mdi-{{ item.icon }}</v-icon
                       >
                     </v-btn>
 
-                    <p class="ma-0">{{ item.name }}</p>
+                    <p
+                      class="ma-0"
+                      style="font-size: 18px; color: #000; font-weight: 500"
+                    >
+                      {{ item.name }}
+                    </p>
                   </v-col>
                 </v-row>
               </v-col>
@@ -390,24 +399,24 @@ export default {
   },
   data() {
     return {
-      black_home: true,
-      on: true,
-      start: false,
-      lock: false,
-      home: false,
-      detail: false,
-
-      // black_home: false,
-      // on: false,
+      // black_home: true,
+      // on: true,
       // start: false,
       // lock: false,
-      // home: true,
+      // home: false,
       // detail: false,
+
+      black_home: false,
+      on: false,
+      start: false,
+      lock: false,
+      home: true,
+      detail: false,
 
       start_value: 0,
       currentTime: new Date(),
       onInterval: null,
-
+      search: "",
       cr: false,
       sk: false,
       ca: false,
@@ -465,6 +474,8 @@ export default {
           dialog: "sb",
         },
       ],
+
+      selectIcon: null,
 
       isTouch: false, // 터치 여부
       isDragging: false, // 드래그 상태
@@ -620,6 +631,21 @@ export default {
     },
     dialogIn(dialog) {
       this[dialog] = true;
+    },
+    searchMenu(menu) {
+      if (this.search != "") {
+        if (menu.name.indexOf(this.search) == -1) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return true;
+      }
+    },
+    homeRightClick(event) {},
+    detailRightClick(event) {
+      console.log();
     },
   },
 };
