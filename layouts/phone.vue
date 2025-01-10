@@ -7,37 +7,12 @@
     <!-- router -->
 
     <!-- error -->
-    <!-- <v-dialog v-model="snackbar_error" persistent scrollable max-width="300px">
-      <v-card flat style="border-radius: 10px">
-        <v-card-text class="pa-5">
-          <v-row no-gutters>
-            <v-col cols="12" class="text-center">
-              <p
-                class="nanum-Bold mt-5 mb-0"
-                style="font-size: 16px; letter-spacing: -0.32px; color: #000000"
-              >
-                {{ error_msg }}
-              </p>
-            </v-col>
-
-            <v-col cols="12" class="mt-10">
-              <v-btn
-                depressed
-                block
-                color="#3185FF"
-                :ripple="false"
-                class="no-background-hover nanum-Bold"
-                rounded
-                height="50"
-                style="font-size: 14px; letter-spacing: -0.28px; color: #ffffff"
-                @click="snackbar_error = false"
-                >확인</v-btn
-              >
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
-    </v-dialog> -->
+    <MessageAlert
+      :dialog="messageAlert"
+      :title="alert_title"
+      :context="alert_msg"
+      @close="messageAlert = false"
+    ></MessageAlert>
     <!-- error -->
   </v-app>
 </template>
@@ -54,6 +29,16 @@ export default {
         this.drawer = false;
       }
     },
+    alert(val) {
+      if (val) {
+        this.messageAlert = true;
+      }
+    },
+    messageAlert(val) {
+      if (!val) {
+        this.$store.commit("alertClear");
+      }
+    },
   },
   computed: {
     windowSize() {
@@ -65,35 +50,20 @@ export default {
     scrollY() {
       return this.$store.state.scrollY;
     },
+    alert() {
+      return this.$store.state.alert;
+    },
+    alert_msg() {
+      return this.$store.state.alert_msg;
+    },
+    alert_title() {
+      return this.$store.state.alert_title;
+    },
   },
   data() {
     return {
-      drawer: false,
       onload: false,
-      snackbar_error: false,
-      snackbar_alert: false,
-      menus: [
-        {
-          id: "about_me",
-          title: "ABOUT ME",
-          icon: "mdi-run",
-        },
-        {
-          id: "skills",
-          title: "SKILLS",
-          icon: "mdi-laptop",
-        },
-        {
-          id: "career",
-          title: "CAREER",
-          icon: "mdi-hub",
-        },
-        {
-          id: "project",
-          title: "PROJECT",
-          icon: "mdi-file-code",
-        },
-      ],
+      messageAlert: false,
     };
   },
   async mounted() {
@@ -117,19 +87,6 @@ export default {
         width: window.innerWidth,
         height: window.innerHeight,
       });
-    },
-    scrollToSection(id) {
-      this.drawer = false;
-      const section = document.getElementById(id);
-      if (section) {
-        var offset = 0;
-        var topPosition = section.offsetTop;
-
-        gsap.to(window, {
-          duration: 0.5,
-          scrollTo: { y: topPosition, offsetY: offset },
-        });
-      }
     },
   },
 };

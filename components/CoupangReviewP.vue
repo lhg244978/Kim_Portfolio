@@ -255,7 +255,7 @@ export default {
           this.next = retdata.next;
         })
         .catch((err) => {
-          alert(err.msg);
+          this.$store.commit("alertThrow", { title: "", context: err.msg });
         });
     },
     getXlsx() {
@@ -299,10 +299,13 @@ export default {
             window.URL.revokeObjectURL(url);
           })
           .catch((err) => {
-            alert(err.msg);
+            this.$store.commit("alertThrow", { title: "", context: err.msg });
           });
       } else {
-        alert("리뷰가 없습니다.");
+        this.$store.commit("alertThrow", {
+          title: "",
+          context: "리뷰가 없습니다.",
+        });
       }
     },
     getJson() {
@@ -319,7 +322,10 @@ export default {
         a.click();
         window.URL.revokeObjectURL(url);
       } else {
-        alert("리뷰가 없습니다.");
+        this.$store.commit("alertThrow", {
+          title: "",
+          context: "리뷰가 없습니다.",
+        });
       }
     },
     updatePage(num) {

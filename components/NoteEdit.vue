@@ -131,11 +131,19 @@ export default {
             },
           })
           .then(() => {
-            alert("성공적으로 업로드 되었습니다.");
-            this.$emit("close");
+            this.$store.commit("alertThrow", {
+              title: "",
+              context: "성공적으로 업로드되었습니다.",
+            });
+            setTimeout(() => {
+              this.$emit("close");
+            }, 100);
           })
           .catch((err) => {
-            alert(err.msg);
+            this.$store.commit("alertThrow", {
+              title: "",
+              context: err.msg,
+            });
           });
       }
     },

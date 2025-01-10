@@ -365,7 +365,10 @@ export default {
           }
         })
         .catch((err) => {
-          alert(err.msg);
+          this.$store.commit("alertThrow", {
+            title: "",
+            context: err.msg,
+          });
         });
     },
     getGroup() {
@@ -384,7 +387,10 @@ export default {
           }
         })
         .catch((err) => {
-          alert(err.msg);
+          this.$store.commit("alertThrow", {
+            title: "",
+            context: err.msg,
+          });
         });
     },
     getStation() {
@@ -411,7 +417,10 @@ export default {
             }
           })
           .catch((err) => {
-            alert(err.msg);
+            this.$store.commit("alertThrow", {
+              title: "",
+              context: err.msg,
+            });
           });
       }
     },
@@ -430,11 +439,13 @@ export default {
             var retdata = data;
             if (retdata) {
               this.stations = retdata;
-              console.log(retdata);
             }
           })
           .catch((err) => {
-            alert(err.msg);
+            this.$store.commit("alertThrow", {
+              title: "",
+              context: err.msg,
+            });
           });
       }
     },

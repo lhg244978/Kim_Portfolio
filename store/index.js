@@ -6,6 +6,9 @@ export const state = () => ({
     height: 0,
   },
   scrollY: 0,
+  alert: false,
+  alert_title: "",
+  alert_msg: "",
 });
 
 export const getters = {
@@ -23,6 +26,15 @@ export const mutations = {
     } else {
       state.processing_msg = msg;
     }
+  },
+  alertThrow(state, data) {
+    state.alert_title = data.title;
+    state.alert_msg = data.context;
+    state.alert = true;
+  },
+  alertClear(state) {
+    state.alert_title = "";
+    state.alert_msg = "";
   },
   setScroll(state, payload) {
     state.scrollY = payload;

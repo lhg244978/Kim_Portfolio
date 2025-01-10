@@ -342,6 +342,7 @@ import CareerP from "@/components/CareerP";
 import SkillsP from "@/components/SkillsP";
 import NoteP from "@/components/NoteP";
 import SubwayP from "@/components/SubwayP";
+import MessageAlert from "@/components/MessageAlert";
 export default {
   layout: "phone",
   comments: {
@@ -351,6 +352,7 @@ export default {
     CareerP: CareerP,
     SkillsP: SkillsP,
     NoteP: NoteP,
+    MessageAlert: MessageAlert,
   },
   computed: {
     windowSize() {
@@ -396,22 +398,30 @@ export default {
         this.home = true;
       }
     },
+    messageAlert(val) {
+      if (!val) {
+        this.messageContext = "";
+        this.messageTitle = "";
+      }
+    },
   },
   data() {
     return {
-      black_home: true,
-      on: true,
-      start: false,
-      lock: false,
-      home: false,
-      detail: false,
-
-      // black_home: false,
-      // on: false,
+      // black_home: true,
+      // on: true,
       // start: false,
       // lock: false,
-      // home: true,
+      // home: false,
       // detail: false,
+
+      black_home: false,
+      on: false,
+      start: false,
+      lock: false,
+      home: true,
+      detail: false,
+
+      bottonAlert: false,
 
       start_value: 0,
       currentTime: new Date(),
