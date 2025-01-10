@@ -430,7 +430,6 @@ export default {
             var retdata = data;
             if (retdata) {
               this.stations = retdata;
-              console.log(retdata);
             }
           })
           .catch((err) => {

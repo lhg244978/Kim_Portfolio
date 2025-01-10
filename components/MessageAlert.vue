@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="dialog" scrollable persistent max-width="400">
-    <v-card color="#f9f9f9" flat style="border-radius: 20px">
+    <v-card color="#d4d3d9" flat style="border-radius: 20px">
       <v-card-text class="py-5 px-10">
         <v-row no-gutters align="center">
           <v-col
@@ -29,7 +29,7 @@
           >
         </v-row>
       </v-card-text>
-      <v-card-actions class="pa-0" style="border-top: 1px solid #000">
+      <v-card-actions class="pa-0" style="border-top: 1px solid #c2c2c6">
         <v-btn
           text
           class="py-8"

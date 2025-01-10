@@ -164,7 +164,39 @@
         @mousemove="onMouseMove"
         @mouseup="onMouseUp"
         @mouseleave="onMouseUp"
-      ></v-col>
+      >
+        <v-row no-gutters class="pa-6">
+          <v-col
+            cols="3"
+            class="text-center mb-4 pa-1"
+            v-for="(item, idx) in homeApp"
+            v-if="searchMenu(item)"
+            :key="idx"
+          >
+            <v-btn
+              class="mb-2"
+              width="110"
+              height="110"
+              :color="item.btn_color"
+              style="border-radius: 20px"
+              :id="item.name"
+              @click="dialogIn(item.dialog)"
+              @contextmenu.prevent.stop="homeRightClick"
+            >
+              <v-icon :color="item.icon_color" :id="item.name" size="90"
+                >mdi-{{ item.icon }}</v-icon
+              >
+            </v-btn>
+
+            <p
+              class="ma-0"
+              style="font-size: 18px; color: #fff; font-weight: 500"
+            >
+              {{ item.name }}
+            </p>
+          </v-col>
+        </v-row>
+      </v-col>
       <v-col
         v-if="home"
         class="pb-5"
@@ -188,48 +220,24 @@
             "
           >
             <v-row no-gutters align="center" class="fill-height">
-              <v-col cols="3" class="pa-4 text-center">
+              <v-col
+                cols="3"
+                v-for="(item, idx2) in homeBottomApp"
+                :key="idx2"
+                class="pa-4 text-center"
+              >
                 <v-btn
-                  color="#33fe33"
                   width="100"
                   height="100"
+                  :color="item.btn_color"
                   style="border-radius: 20px"
-                  @click="ap = true"
+                  :id="item.name"
+                  @click="dialogIn(item.dialog)"
+                  @contextmenu.prevent.stop="detailRightClick"
                 >
-                  <v-icon size="80">mdi-information</v-icon>
-                </v-btn>
-              </v-col>
-              <v-col cols="3" class="pa-4 text-center">
-                <v-btn
-                  color="#d7d9da"
-                  width="100"
-                  height="100"
-                  style="border-radius: 20px"
-                  @click="sk = true"
-                >
-                  <v-icon color="#000" size="80">mdi-head-cog</v-icon>
-                </v-btn>
-              </v-col>
-              <v-col cols="3" class="pa-4 text-center">
-                <v-btn
-                  color="#1ba8f8"
-                  width="100"
-                  height="100"
-                  style="border-radius: 20px"
-                  @click="ca = true"
-                >
-                  <v-icon color="#fff" size="80">mdi-stairs-up</v-icon>
-                </v-btn>
-              </v-col>
-              <v-col cols="3" class="pa-4 text-center">
-                <v-btn
-                  color="#ffe536"
-                  width="100"
-                  height="100"
-                  style="border-radius: 20px"
-                  @click="nop = true"
-                >
-                  <v-icon color="#000" size="80">mdi-note-edit-outline</v-icon>
+                  <v-icon :color="item.icon_color" size="90"
+                    >mdi-{{ item.icon }}</v-icon
+                  >
                 </v-btn>
               </v-col>
             </v-row>
@@ -332,6 +340,15 @@
     <NoteP :dialog="nop" @close="nop = false"></NoteP>
     <CoupangReviewP :dialog="cr" @close="cr = false"></CoupangReviewP>
     <SubwayP :dialog="sb" @close="sb = false"></SubwayP>
+    <ButtonAlert
+      :dialog="buttonAlert"
+      :app="buttonApp"
+      :type="buttonAlertType"
+      @removeApp="removeApp"
+      @deleteFromHome="deleteFromHome"
+      @moveToHome="moveToHome"
+      @close="buttonAlert = false"
+    ></ButtonAlert>
   </v-container>
 </template>
 
@@ -343,6 +360,7 @@ import SkillsP from "@/components/SkillsP";
 import NoteP from "@/components/NoteP";
 import SubwayP from "@/components/SubwayP";
 import MessageAlert from "@/components/MessageAlert";
+import ButtonAlert from "@/components/ButtonAlert";
 export default {
   layout: "phone",
   comments: {
@@ -353,6 +371,7 @@ export default {
     SkillsP: SkillsP,
     NoteP: NoteP,
     MessageAlert: MessageAlert,
+    ButtonAlert: ButtonAlert,
   },
   computed: {
     windowSize() {
@@ -398,10 +417,10 @@ export default {
         this.home = true;
       }
     },
-    messageAlert(val) {
+    buttonAlert(val) {
       if (!val) {
-        this.messageContext = "";
-        this.messageTitle = "";
+        this.buttonApp = null;
+        this.buttonAlertType = "";
       }
     },
   },
@@ -421,7 +440,9 @@ export default {
       home: true,
       detail: false,
 
-      bottonAlert: false,
+      buttonAlert: false,
+      buttonApp: null,
+      buttonAlertType: "",
 
       start_value: 0,
       currentTime: new Date(),
@@ -434,6 +455,41 @@ export default {
       sb: false,
       ap: false,
 
+      homeApp: [],
+      homeBottomApp: [
+        {
+          name: "소개",
+          icon: "information",
+          icon_color: "#fff",
+          btn_color: "#33fe33",
+          img: "",
+          dialog: "ap",
+        },
+        {
+          name: "스킬",
+          icon: "head-cog",
+          icon_color: "#000",
+          btn_color: "#d7d9da",
+          img: "",
+          dialog: "sk",
+        },
+        {
+          name: "커리어",
+          icon: "stairs-up",
+          icon_color: "#fff",
+          btn_color: "#1ba8f8",
+          img: "",
+          dialog: "ca",
+        },
+        {
+          name: "메모",
+          icon: "note-edit-outline",
+          icon_color: "#000",
+          btn_color: "#ffe536",
+          img: "",
+          dialog: "nop",
+        },
+      ],
       detailApp: [
         {
           name: "소개",
@@ -653,9 +709,132 @@ export default {
         return true;
       }
     },
-    homeRightClick(event) {},
+    homeRightClick(event) {
+      var appId = event.target.id;
+      if (appId != "") {
+        var app = null;
+        for (var idx in this.detailApp) {
+          if (this.detailApp[idx].name == appId) {
+            app = this.detailApp[idx];
+          }
+        }
+        if (app) {
+          this.buttonApp = app;
+          this.buttonAlertType = "home";
+          this.buttonAlert = true;
+        } else {
+          this.$store.commit("alertThrow", {
+            title: "",
+            context: "앱을 찾을 수 없습니다.",
+          });
+        }
+      } else {
+        this.$store.commit("alertThrow", {
+          title: "",
+          context: "앱을 찾을 수 없습니다.",
+        });
+      }
+    },
     detailRightClick(event) {
-      console.log();
+      var appId = event.target.id;
+      if (appId != "") {
+        var app = null;
+        for (var idx in this.detailApp) {
+          if (this.detailApp[idx].name == appId) {
+            app = this.detailApp[idx];
+          }
+        }
+        if (app) {
+          this.buttonApp = app;
+          this.buttonAlertType = "applibrary";
+          this.buttonAlert = true;
+        } else {
+          this.$store.commit("alertThrow", {
+            title: "",
+            context: "앱을 찾을 수 없습니다.",
+          });
+        }
+      } else {
+        this.$store.commit("alertThrow", {
+          title: "",
+          context: "앱을 찾을 수 없습니다.",
+        });
+      }
+    },
+    moveToHome() {
+      var name = this.buttonApp.name;
+      var copy = true;
+      if (this.homeApp.length) {
+        for (var idx in this.homeApp) {
+          if (this.homeApp[idx].name == name) {
+            copy = false;
+            break;
+          }
+        }
+        if (copy) {
+          this.homeApp.push(this.buttonApp);
+          this.buttonAlert = false;
+          this.detail = false;
+        } else {
+          this.buttonAlert = false;
+          this.$store.commit("alertThrow", {
+            title: "",
+            context: "홈에 같은 앱이 존재합니다.",
+          });
+        }
+      } else {
+        this.homeApp.push(this.buttonApp);
+        this.buttonAlert = false;
+        this.detail = false;
+      }
+    },
+    deleteFromHome() {
+      var name = this.buttonApp.name;
+      var home_idx = -1;
+      for (var idx in this.homeApp) {
+        if (this.homeApp[idx].name == name) {
+          home_idx = idx;
+          break;
+        }
+      }
+      if (home_idx >= 0) {
+        this.homeApp.splice(home_idx, 1);
+      }
+      this.buttonAlert = false;
+    },
+    removeApp() {
+      var name = this.buttonApp.name;
+      var home_idx = -1;
+      var home_b_idx = -1;
+      var detail_idx = -1;
+      for (var idx in this.homeApp) {
+        if (this.homeApp[idx].name == name) {
+          home_idx = idx;
+          break;
+        }
+      }
+      for (var idx in this.detailApp) {
+        if (this.detailApp[idx].name == name) {
+          detail_idx = idx;
+          break;
+        }
+      }
+      for (var idx in this.homeBottomApp) {
+        if (this.homeBottomApp[idx].name == name) {
+          home_b_idx = idx;
+          break;
+        }
+      }
+      if (home_idx >= 0) {
+        this.homeApp.splice(home_idx, 1);
+      }
+      if (detail_idx >= 0) {
+        this.detailApp.splice(detail_idx, 1);
+      }
+      if (home_b_idx >= 0) {
+        this.homeBottomApp.splice(home_b_idx, 1);
+      }
+      this.buttonAlert = false;
     },
   },
 };
@@ -691,5 +870,14 @@ export default {
 html,
 body {
   overflow: hidden; /* 스크롤 비활성화 및 스크롤 바 제거 */
+}
+.v-dialog {
+  box-shadow: none !important;
+}
+i {
+  pointer-events: none;
+}
+.v-btn__content {
+  pointer-events: none;
 }
 </style>

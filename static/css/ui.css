@@ -80,3 +80,7 @@ body,
 .v-application--is-ltr .v-rating .v-icon {
   padding: 0px 3px 0px 3px;
 }
+
+.v-btn {
+  text-transform: none !important;
+}
