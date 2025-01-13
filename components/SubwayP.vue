@@ -1,57 +1,149 @@
 <template>
   <v-dialog v-model="dialog" scrollable persistent fullscreen>
-    <v-card color="#fff" flat style="border-radius: 10px">
-      <v-card-title>
-        <v-btn class="ml-auto" icon @click="$emit('close')">
-          <v-icon color="#000">mdi-close</v-icon>
+    <v-card v-if="start" color="#ffffff" flat style="border-radius: 0px">
+      <v-card-title class="pa-10 pt-15">
+        <v-btn class="mr-auto" icon @click="$emit('close')">
+          <v-icon size="48" color="#000">mdi-chevron-left</v-icon>
         </v-btn>
       </v-card-title>
-      <v-card-text class="pa-5">
+      <v-card-text class="pa-10">
+        <v-row
+          class="fill-height"
+          no-gutters
+          align="center"
+          style="width: 100%"
+        >
+          <v-col cols="12" class="text-center">
+            <v-btn
+              :ripple="false"
+              class="no-background-hover"
+              readonly
+              color="#1ba8f8"
+              width="90"
+              height="90"
+              style="border-radius: 20px"
+            >
+              <v-icon size="60">mdi-stairs-up</v-icon>
+            </v-btn>
+            <p class="mb-0 mt-10" style="font-size: 30px; color: #000">...</p>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+    <v-card v-else color="#fff" flat style="border-radius: 0px">
+      <v-card-title class="pa-10 pt-15">
+        <v-btn class="mr-auto" icon @click="$emit('close')">
+          <v-icon size="48" color="#000">mdi-chevron-left</v-icon>
+        </v-btn>
+      </v-card-title>
+      <v-card-text class="pa-10">
         <v-row no-gutters style="color: #000">
-          <v-col
-            cols="12"
-            sm="6"
-            :class="windowSize.width > 600 ? 'pr-3' : 'pb-5'"
-          >
-            <v-select
-              label="호선을 선택해주세요."
-              v-model="line"
-              :items="lines"
-              light
-              hide-details
-              outlined
-              item-value="line"
-              item-text="line"
-              height="46"
-            ></v-select>
+          <v-col cols="12" class="text-center">
+            <v-menu offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  text
+                  class="no-background-hover"
+                  v-bind="attrs"
+                  v-on="on"
+                  style="font-size: 30px; color: #000; font-weight: 700"
+                >
+                  {{ line ? line.line : "호선을 선택해주세요" }}
+                  <v-icon size="30">mdi-menu-down</v-icon>
+                </v-btn>
+              </template>
+              <v-list light>
+                <v-list-item
+                  v-for="(item, index) in lines"
+                  :key="index"
+                  light
+                  @click="line = item"
+                >
+                  <v-list-item-title
+                    style="font-size: 22px; letter-spacing: -0.22px"
+                    >{{ item.line }}</v-list-item-title
+                  >
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-col>
+          <v-col cols="12" class="py-10">
+            <v-chip-group
+              v-model="chip"
+              active-class="primary--text"
+              height="200"
+            >
+              <v-chip
+                v-for="items in groups"
+                :key="items.g_code"
+                @click="group = items"
+                style="
+                  height: 50px;
+                  font-size: 24px;
+                  border-radius: 25px;
+                  letter-spacing: -0.24px;
+                "
+              >
+                {{ items.name ? items.name : "-" }}
+              </v-chip>
+            </v-chip-group>
+          </v-col>
+          <v-col cols="12" v-if="group">
+            <v-row no-gutters align="center">
+              <v-col cols="6">
+                <v-btn
+                  block
+                  height="50"
+                  :color="updnLine == 0 ? station_color[line.line] : '#fff'"
+                  @click="updnLine = 0"
+                  :style="`
+                    font-size: 24px;
+                    letter-spacing: -0.24px;
+                    font-weight: 700;
+                    border-radius: 0px;
+                    border: 1px solid #bfbfbf;
+                    box-shadow: none !important;
+              color:  ${updnLine == 0 ? '#fff' : '#000'} ;`"
+                >
+                  상행 (외선)
+                </v-btn>
+              </v-col>
+              <v-col cols="6">
+                <v-btn
+                  block
+                  height="50"
+                  :color="updnLine == 1 ? station_color[line.line] : '#fff'"
+                  @click="updnLine = 1"
+                  :style="`
+                    font-size: 24px;
+                    letter-spacing: -0.24px;
+                    font-weight: 700;
+                    border-radius: 0px;
+                    border: 1px solid #bfbfbf;
+                    box-shadow: none !important;
+              color: ${updnLine == 1 ? '#fff' : '#000'};`"
+                >
+                  하행 (내선)
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-col>
           <v-col
             cols="12"
-            sm="6"
-            :class="windowSize.width > 600 ? 'pl-3 pb-5' : 'pb-5'"
+            v-if="updnLine == 0 || updnLine == 1"
+            style="border: 2px #bfbfbf solid"
           >
-            <v-select
-              label="그룹을 선택해주세요."
-              v-model="group"
-              :items="groups"
-              light
-              hide-details
-              outlined
-              item-value="g_code"
-              item-text="name"
-              height="46"
-            ></v-select>
-          </v-col>
-          <v-col cols="12">
             <v-row
               no-gutters
               align="center"
               class="pa-5"
-              :style="`overflow: auto; height: ${
-                this.station_height > windowSize.height - 400
-                  ? windowSize.height - 400
-                  : this.station_height
-              }px`"
+              :style="`${
+                this.station_height > windowSize.height - 500
+                  ? 'overflow: auto; height:' +
+                    (windowSize.height - 500) +
+                    'px;'
+                  : ''
+              }`"
             >
               <v-col
                 cols="12"
@@ -61,10 +153,18 @@
               >
                 <div class="d-flex" style="position: relative">
                   <div
-                    class="station-circle"
-                    :style="`background-color:${station_color[line]}`"
-                  ></div>
-
+                    :style="`background-color:${
+                      station_color[line.line]
+                    };position: relative; width:25px; height:25px; margin-left:200px;${
+                      idx == 0
+                        ? 'border-top-left-radius:20px;border-top-right-radius:20px'
+                        : idx + 1 == stations.length
+                        ? 'border-bottom-left-radius:20px;border-bottom-right-radius:20px'
+                        : ''
+                    }`"
+                  >
+                    <div class="station-circle"></div>
+                  </div>
                   <v-btn
                     icon
                     v-if="station.downdata"
@@ -75,25 +175,20 @@
                     class="down_train"
                   >
                     <v-icon
-                      v-if="station.downdata.statnTnm != '성수종착'"
-                      size="16"
+                      size="25"
                       color="#fff"
-                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px;`"
-                      >mdi-chevron-down</v-icon
+                      :style="`background-color:${
+                        station_color[line.line]
+                      };border-radius:50%; width:35px; height:35px;`"
+                      >mdi-subway-variant</v-icon
                     >
-                    <span
-                      v-else
-                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px; color:#fff`"
-                    >
-                      {{ station.downdata.updnLine == 0 ? "내" : "외" }}
-                    </span>
                   </v-btn>
 
                   <div
                     v-if="station.downdata"
                     class="tooltip-down"
                     :style="`opacity :${
-                      station.downdata.tooltipValue == true ? 1 : 0
+                      station.downdata.tooltipValue == true ? 1 : 1
                     } ;`"
                   >
                     <span>
@@ -121,26 +216,20 @@
                     "
                   >
                     <v-icon
-                      v-if="station.updata.statnTnm != '성수종착'"
-                      size="16"
+                      size="25"
                       color="#fff"
-                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px;`"
-                      >mdi-chevron-up</v-icon
+                      :style="`background-color:${
+                        station_color[line.line]
+                      };border-radius:50%; width:35px; height:35px;`"
+                      >mdi-subway-variant</v-icon
                     >
-
-                    <span
-                      v-else
-                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px; color:#fff`"
-                    >
-                      {{ station.updata.updnLine == 0 ? "내" : "외" }}
-                    </span>
                   </v-btn>
 
                   <div
                     v-if="station.updata"
                     class="tooltip-up"
                     :style="`opacity :${
-                      station.updata.tooltipValue == true ? 1 : 0
+                      station.updata.tooltipValue == true ? 1 : 1
                     } ;`"
                   >
                     <span>
@@ -179,24 +268,19 @@
                     style="opacity: "
                   >
                     <v-icon
-                      v-if="station.donwlinedata.statnTnm != '성수종착'"
-                      size="16"
+                      size="25"
                       color="#fff"
-                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px;`"
-                      >mdi-chevron-down
+                      :style="`background-color:${
+                        station_color[line.line]
+                      };border-radius:50%; width:35px; height:35px;`"
+                      >mdi-subway-variant
                     </v-icon>
-                    <span
-                      v-else
-                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px; color:#fff`"
-                    >
-                      {{ station.donwlinedata.updnLine == 0 ? "내" : "외" }}
-                    </span>
                   </v-btn>
                   <div
                     v-if="station.donwlinedata"
                     class="tooltip-downline"
                     :style="`opacity :${
-                      station.donwlinedata.tooltipValue == true ? 1 : 0
+                      station.donwlinedata.tooltipValue == true ? 1 : 1
                     } ;`"
                   >
                     <span>
@@ -229,25 +313,20 @@
                     "
                   >
                     <v-icon
-                      v-if="station.uplinedata.statnTnm != '성수종착'"
-                      size="16"
+                      size="25"
                       color="#fff"
-                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px;`"
-                      >mdi-chevron-up</v-icon
+                      :style="`background-color:${
+                        station_color[line.line]
+                      };border-radius:50%; width:35px; height:35px;`"
+                      >mdi-subway-variant</v-icon
                     >
-                    <span
-                      v-else
-                      :style="`background-color:${station_color[line]};border-radius:50%; width:16px; height:16px; color:#fff`"
-                    >
-                      {{ station.uplinedata.updnLine == 0 ? "내" : "외" }}
-                    </span>
                   </v-btn>
 
                   <div
                     v-if="station.uplinedata"
                     class="tooltip-upline"
                     :style="`opacity :${
-                      station.uplinedata.tooltipValue == true ? 1 : 0
+                      station.uplinedata.tooltipValue == true ? 1 : 1
                     } ;`"
                   >
                     <span>
@@ -273,7 +352,7 @@
                   <div
                     v-if="idx != stations.length - 1"
                     class="station-connection"
-                    :style="`border-color:${station_color[line]}`"
+                    :style="`background-color:${station_color[line.line]}`"
                   ></div>
                 </div>
               </v-col>
@@ -293,26 +372,44 @@ export default {
   watch: {
     dialog(val) {
       if (!val) {
-        this.line = "";
+        this.start = true;
+        this.line = null;
         this.lines = [];
-        this.group = "";
+        this.group = null;
         this.groups = [];
         this.stations = [];
       } else {
+        setTimeout(() => {
+          this.start = false;
+        }, 1000);
+      }
+    },
+    start(val) {
+      if (!val) {
         this.getLine();
       }
     },
     line(val) {
       if (!val) {
       } else {
-        this.group = "";
+        this.group = null;
         this.groups = [];
+        this.stations = [];
+        this.updnLine = null;
+        this.chip = null;
         this.getGroup();
       }
     },
     group(val) {
       if (!val) {
       } else {
+        this.stations = [];
+        this.updnLine = 0;
+        this.getStation();
+      }
+    },
+    updnLine(val) {
+      if (val == 0 || val == 1) {
         this.stations = [];
         this.getStation();
       }
@@ -332,11 +429,14 @@ export default {
   },
   data() {
     return {
-      line: "",
+      start: true,
+      line: null,
       lines: [],
-      group: "",
+      chip: null,
+      group: null,
       groups: [],
       stations: [],
+      updnLine: null,
       station_height: 0,
       station_color: {
         "1호선": "#051d86",
@@ -372,16 +472,18 @@ export default {
         });
     },
     getGroup() {
+      var line = this.line ? this.line.line : "";
       this.$store
         .dispatch("api/axios", {
           method: "GET",
           uri: `/subway/group`,
           params: {
-            line: this.line,
+            line,
           },
         })
         .then((data) => {
           var retdata = data;
+
           if (retdata.length) {
             this.groups = retdata;
           }
@@ -395,22 +497,25 @@ export default {
     },
     getStation() {
       if (this.line && this.group) {
-        this.station_height = 0;
+        var line = this.line ? this.line.line : "";
+        var group = this.group ? this.group.g_code : "";
+
         this.$store
           .dispatch("api/axios", {
             method: "GET",
             uri: `/subway/station`,
             params: {
-              line: this.line,
-              group: this.group,
+              line,
+              group,
             },
           })
           .then((data) => {
             var retdata = data;
             if (retdata.length) {
               this.stations = retdata;
-              this.station_height = this.stations.length * 54;
+              this.station_height = this.stations.length * 115;
               this.getTrainInfo();
+              // 실시간 interval
               // setInterval(() => {
               //   this.getTrainInfo();
               // }, 11500);
@@ -433,6 +538,7 @@ export default {
             params: {
               line: this.line,
               detailData: this.stations,
+              updnLine: this.updnLine,
             },
           })
           .then((data) => {
@@ -462,102 +568,109 @@ export default {
 
 <style lang="css" scoped>
 .station-connection {
-  border: solid #2a52be;
-  height: 44px;
-  width: 1px;
+  height: 100px;
+  width: 25px;
   border-left-width: 0px;
   margin-top: 0px;
-  margin-left: auto;
+  margin-left: 200px;
   margin-right: auto;
+  border-radius: 0px;
+  z-index: 10;
 }
 .station-circle {
-  width: 10px;
-  height: 10px;
-  background-color: #2a52be;
-  color: #fff;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  background-color: #fff;
   border-radius: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -1px;
+  margin-left: 5px;
+  margin-top: auto;
+  margin-bottom: auto;
+  top: 0;
+  bottom: 0;
+  z-index: 11;
 }
 .station-name {
-  width: 120px;
-  height: 30px;
   background: none;
   color: #000;
-  font-weight: 800;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.24px;
   border-radius: 50%;
   top: 0px;
-  left: 125px;
+  left: 250px;
   right: 0;
-  margin-left: auto;
+  margin-left: 0px;
   margin-right: auto;
-  margin-top: -5px;
+  margin-top: -27px;
   text-align: left;
   z-index: 5;
 }
 .line_down_train {
   border-radius: 50%;
   border: 1px solid #000;
-  width: 14px;
-  height: 14px;
+  width: 35px;
+  height: 35px;
   position: absolute;
-  top: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  left: 83px;
+  top: 30px;
+  left: -5px;
   right: 0;
-
+  margin-top: 0px;
+  margin-left: 200px;
+  margin-right: auto;
   z-index: 15;
 }
 
 .line_up_train {
   border-radius: 50%;
   border: 1px solid #000;
-  width: 14px;
-  height: 14px;
+  width: 35px;
+  height: 35px;
   position: absolute;
-  top: 10px;
-  margin-left: auto;
+  top: 30px;
+  left: -5px;
+  right: 0;
+  margin-top: 0px;
+  margin-left: 200px;
   margin-right: auto;
-  left: 0;
-  right: 83px;
-
   z-index: 15;
 }
 .down_train {
   border-radius: 50%;
   border: 1px solid #000;
-  width: 14px;
-  height: 14px;
+  width: 35px;
+  height: 35px;
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 83px;
+  top: -5px;
+  left: -5px;
   right: 0;
+  margin-top: 0px;
+  margin-left: 200px;
+  margin-right: auto;
 
   z-index: 15;
 }
 .up_train {
   border-radius: 50%;
   border: 1px solid #000;
-  width: 14px;
-  height: 14px;
+  width: 35px;
+  height: 35px;
   position: absolute;
-  margin-left: auto;
+  top: -5px;
+  left: -5px;
+  right: 0;
+  margin-top: 0px;
+  margin-left: 200px;
   margin-right: auto;
-  left: 0;
-  right: 83px;
-
   z-index: 15;
 }
 
 .tooltip-down {
   position: absolute;
-  top: -40px; /* 버튼 위에 위치 */
-  margin-left: auto;
+  top: -9px; /* 버튼 위에 위치 */
+  margin-left: 0px;
   margin-right: auto;
-  left: 83px;
+  left: 30px;
   right: 0;
   background-color: #2c3e50;
   color: #fff;
@@ -577,11 +690,11 @@ export default {
 
 .tooltip-up {
   position: absolute;
-  top: -40px; /* 버튼 위에 위치 */
-  margin-left: auto;
+  top: -9px; /* 버튼 위에 위치 */
+  margin-left: 0px;
   margin-right: auto;
-  left: 0;
-  right: 83px;
+  left: 30px;
+  right: 0;
   background-color: #2c3e50;
   color: #fff;
   padding: 5px 10px;
@@ -600,11 +713,11 @@ export default {
 
 .tooltip-downline {
   position: absolute;
-  position: absolute;
-  top: -40px; /* 버튼 위에 위치 */
-  margin-left: auto;
+
+  top: 30px; /* 버튼 위에 위치 */
+  margin-left: 0px;
   margin-right: auto;
-  left: 83px;
+  left: 30px;
   right: 0;
   background-color: #2c3e50;
   color: #fff;
@@ -624,11 +737,11 @@ export default {
 
 .tooltip-upline {
   position: absolute;
-  top: -40px; /* 버튼 위에 위치 */
-  margin-left: auto;
+  top: 30px; /* 버튼 위에 위치 */
+  margin-left: 0px;
   margin-right: auto;
-  left: 0;
-  right: 83px;
+  left: 30px;
+  right: 0;
   background-color: #2c3e50;
   color: #fff;
   padding: 5px 10px;

@@ -359,7 +359,7 @@ import CareerP from "@/components/CareerP";
 import SkillsP from "@/components/SkillsP";
 import NoteP from "@/components/NoteP";
 import SubwayP from "@/components/SubwayP";
-import MessageAlert from "@/components/MessageAlert";
+
 import ButtonAlert from "@/components/ButtonAlert";
 export default {
   layout: "phone",
@@ -370,7 +370,7 @@ export default {
     CareerP: CareerP,
     SkillsP: SkillsP,
     NoteP: NoteP,
-    MessageAlert: MessageAlert,
+
     ButtonAlert: ButtonAlert,
   },
   computed: {
@@ -455,7 +455,24 @@ export default {
       sb: false,
       ap: false,
 
-      homeApp: [],
+      homeApp: [
+        {
+          name: "쿠팡리뷰",
+          icon: "language-c",
+          icon_color: "#fff",
+          btn_color: "#db3123",
+          img: "",
+          dialog: "cr",
+        },
+        {
+          name: "실시간 지하철",
+          icon: "subway-variant",
+          icon_color: "#3ca4ff",
+          btn_color: "#171f31",
+          img: "",
+          dialog: "sb",
+        },
+      ],
       homeBottomApp: [
         {
           name: "소개",
@@ -567,6 +584,7 @@ export default {
     document.addEventListener("mouseup", () => {
       cursor.style.transform = "translate(-50%, -50%) scale(1)";
     });
+    this.sb = true;
     setInterval(() => {
       this.updateTime();
     }, 1000); // 1초마다 시간 업데이트

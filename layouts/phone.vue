@@ -7,12 +7,50 @@
     <!-- router -->
 
     <!-- error -->
-    <MessageAlert
-      :dialog="messageAlert"
-      :title="alert_title"
-      :context="alert_msg"
-      @close="messageAlert = false"
-    ></MessageAlert>
+    <v-dialog v-model="messageAlert" scrollable persistent max-width="400">
+      <v-card color="#d4d3d9" flat style="border-radius: 20px">
+        <v-card-text class="py-5 px-10">
+          <v-row no-gutters align="center">
+            <v-col
+              cols="12"
+              class="text-center mb-5"
+              style="
+                font-size: 24px;
+                font-weight: 700;
+                letter-spacing: -0.24px;
+                color: #000;
+              "
+            >
+              {{ alert_title ? alert_title : "Alert" }}</v-col
+            >
+            <v-col
+              cols="12"
+              class="text-center mb-5"
+              style="
+                font-size: 18px;
+                font-weight: 400;
+                letter-spacing: -0.18px;
+                color: #000;
+              "
+            >
+              {{ alert_msg ? alert_msg : "-" }}</v-col
+            >
+          </v-row>
+        </v-card-text>
+        <v-card-actions class="pa-0" style="border-top: 1px solid #c2c2c6">
+          <v-btn
+            text
+            class="py-8"
+            color="#6aa4f6"
+            block
+            @click="messageAlert = false"
+            style="font-size: 20px; font-weight: 400; letter-spacing: -0.24px"
+          >
+            OK
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <!-- error -->
   </v-app>
 </template>

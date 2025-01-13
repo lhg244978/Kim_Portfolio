@@ -35,6 +35,7 @@ export const mutations = {
   alertClear(state) {
     state.alert_title = "";
     state.alert_msg = "";
+    state.alert = false;
   },
   setScroll(state, payload) {
     state.scrollY = payload;
