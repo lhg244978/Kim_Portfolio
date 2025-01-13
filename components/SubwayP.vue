@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="dialog" scrollable persistent fullscreen>
-    <v-card v-if="start" color="#ffffff" flat style="border-radius: 0px">
+    <v-card v-if="start" color="#3ca4ff" flat style="border-radius: 0px">
       <v-card-title class="pa-10 pt-15">
         <v-btn class="mr-auto" icon @click="$emit('close')">
           <v-icon size="48" color="#000">mdi-chevron-left</v-icon>
@@ -18,14 +18,18 @@
               :ripple="false"
               class="no-background-hover"
               readonly
-              color="#1ba8f8"
+              color="#171f31"
               width="90"
               height="90"
               style="border-radius: 20px"
             >
-              <v-icon size="60">mdi-stairs-up</v-icon>
+              <v-icon color="#3ca4ff" size="60">mdi-subway-variant</v-icon>
             </v-btn>
-            <p class="mb-0 mt-10" style="font-size: 30px; color: #000">...</p>
+            <p class="mb-0 mt-10" style="font-size: 30px; color: #fff">
+              서울시 공공데이터를 이용한 <br />
+              <br />
+              실시간 지하철노선로 입니다.
+            </p>
           </v-col>
         </v-row>
       </v-card-text>
