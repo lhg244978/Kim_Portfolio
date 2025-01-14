@@ -558,6 +558,7 @@ export default {
         this.line = null;
         this.lines = [];
         this.group = null;
+        this.updnLine = null;
         this.groups = [];
         this.stations = [];
         this.detailStation = null;
