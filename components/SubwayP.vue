@@ -29,6 +29,11 @@
               서울시 공공데이터를 이용한 <br />
               <br />
               실시간 지하철노선로 입니다.
+              <br />
+              <br />
+              <span style="font-size: 20px; letter-spacing: -0.24px"
+                >(1일 1000건의 횟수 제한으로 interval은 제외되어있습니다.)</span
+              >
             </p>
           </v-col>
         </v-row>
@@ -92,6 +97,177 @@
               </v-chip>
             </v-chip-group>
           </v-col>
+          <v-col
+            cols="12"
+            v-if="line && detailStation"
+            class="py-5 mb-10"
+            style="border: 1px solid #bfbfbf; border-radius: 8px"
+          >
+            <v-row
+              no-gutters
+              align="center"
+              style="position: relative; width: 100%; height: 250px"
+            >
+              <v-col
+                cols="10"
+                class="mx-auto"
+                style="position: absolute; left: 0; right: 0"
+              >
+                <v-row no-gutters align="center">
+                  <v-col
+                    cols="12"
+                    :style="`height: 50px; background-color:${
+                      station_color[line.line]
+                    }; border-radius:50px;color:#fff`"
+                  >
+                    <v-row
+                      class="fill-height px-2"
+                      no-gutters
+                      align="center"
+                      style="
+                        font-size: 18px;
+                        letter-spacing: -0.18px;
+                        font-weight: 500;
+                      "
+                    >
+                      <v-icon size="24" color="#fff">mdi-menu-left</v-icon>
+                      <span>
+                        {{
+                          stations[detailStation.idx - 1]
+                            ? stations[detailStation.idx - 1].name
+                            : "-"
+                        }}
+                      </span>
+                      <v-spacer></v-spacer>
+                      <span>{{
+                        stations[detailStation.idx + 1]
+                          ? stations[detailStation.idx + 1].name
+                          : "-"
+                      }}</span>
+                      <v-icon size="24" color="#fff"
+                        >mdi-menu-right</v-icon
+                      ></v-row
+                    >
+                  </v-col>
+                </v-row>
+              </v-col>
+              <v-col
+                v-if="detailStation.stationInfo"
+                cols="4"
+                class="mx-auto"
+                style="position: absolute; left: 0; right: 0"
+              >
+                <v-row no-gutters align="center">
+                  <v-col
+                    cols="12"
+                    :style="`height: 226px; background-color: #fff; border:${
+                      station_color[line.line]
+                    } 20px solid; border-radius:50%; `"
+                  >
+                    <v-row
+                      class="fill-height"
+                      no-gutters
+                      align="center"
+                      style="
+                        width: 100%;
+                        font-size: 24px;
+                        letter-spacing: -0.24px;
+                        font-weight: 700;
+                        color: #000;
+                      "
+                    >
+                      <v-spacer></v-spacer>
+                      <span>{{ detailStation.stationInfo.name }}</span>
+                      <v-spacer></v-spacer>
+                    </v-row>
+                  </v-col> </v-row
+              ></v-col>
+            </v-row>
+            <v-row no-gutters align="start" class="pa-5">
+              <v-col cols="6" class="pr-1">
+                <v-card
+                  color="#fff"
+                  light
+                  outlined
+                  style="border-color: #bfbfbf"
+                >
+                  <v-card-title
+                    class="text-center"
+                    style="
+                      font-size: 18px;
+                      letter-spacing: -0.56px;
+                      font-weight: 700;
+                      border-bottom: 1px #bfbfbf solid;
+                    "
+                  >
+                    상행 (내선)
+                  </v-card-title>
+                  <v-card-text class="pa-0">
+                    <v-row no-gutters align="center">
+                      <v-col
+                        cols="12"
+                        v-for="(upitem, idx_up) in detailStation.up"
+                        :key="idx_up"
+                        class="d-flex px-4 py-4"
+                        :style="`font-size: 16px; letter-spacing: -0.56px;${
+                          idx_up + 1 == detailStation.up.length
+                            ? ''
+                            : 'border-bottom: 1px #bfbfbf solid;'
+                        }`"
+                      >
+                        <span style="font-weight: 600">
+                          {{ upitem.bstatnNm }}행 {{ upitem.btrainNo }} 열차:
+                        </span>
+                        <v-spacer></v-spacer> {{ upitem.arvlMsg2 }}
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="6" class="pr-1">
+                <v-card
+                  color="#fff"
+                  light
+                  outlined
+                  style="border-color: #bfbfbf"
+                >
+                  <v-card-title
+                    class="text-center"
+                    style="
+                      font-size: 18px;
+                      letter-spacing: -0.56px;
+                      font-weight: 700;
+                      border-bottom: 1px #bfbfbf solid;
+                    "
+                  >
+                    하행 (외선)
+                  </v-card-title>
+
+                  <v-card-text class="pa-0"
+                    ><v-row no-gutters align="center">
+                      <v-col
+                        cols="12"
+                        v-for="(downitem, idx_down) in detailStation.down"
+                        :key="idx_down"
+                        class="d-flex pa-4"
+                        :style="`font-size: 16px; letter-spacing: -0.56px;${
+                          idx_down + 1 == detailStation.down.length
+                            ? ''
+                            : 'border-bottom: 1px #bfbfbf solid;'
+                        }`"
+                      >
+                        <span style="font-weight: 600">
+                          {{ downitem.bstatnNm }}행
+                          {{ downitem.btrainNo }} 열차:
+                        </span>
+                        <v-spacer></v-spacer> {{ downitem.arvlMsg2 }}
+                      </v-col>
+                    </v-row></v-card-text
+                  >
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-col>
           <v-col cols="12" v-if="group">
             <v-row no-gutters align="center">
               <v-col cols="6">
@@ -109,7 +285,7 @@
                     box-shadow: none !important;
               color:  ${updnLine == 0 ? '#fff' : '#000'} ;`"
                 >
-                  상행 (외선)
+                  상행 (내선)
                 </v-btn>
               </v-col>
               <v-col cols="6">
@@ -127,7 +303,7 @@
                     box-shadow: none !important;
               color: ${updnLine == 1 ? '#fff' : '#000'};`"
                 >
-                  하행 (내선)
+                  하행 (외선)
                 </v-btn>
               </v-col>
             </v-row>
@@ -258,7 +434,9 @@
                     class="station-name"
                     style="position: absolute; top: 0px; color: #000"
                   >
-                    {{ station.name }}
+                    <span @click="getDetailStation(station, idx)">
+                      {{ station.name }}</span
+                    >
                   </div>
 
                   <v-btn
@@ -382,6 +560,7 @@ export default {
         this.group = null;
         this.groups = [];
         this.stations = [];
+        this.detailStation = null;
       } else {
         setTimeout(() => {
           this.start = false;
@@ -401,6 +580,7 @@ export default {
         this.stations = [];
         this.updnLine = null;
         this.chip = null;
+        this.detailStation = null;
         this.getGroup();
       }
     },
@@ -409,12 +589,14 @@ export default {
       } else {
         this.stations = [];
         this.updnLine = 0;
+        this.detailStation = null;
         this.getStation();
       }
     },
     updnLine(val) {
       if (val == 0 || val == 1) {
         this.stations = [];
+        this.detailStation = null;
         this.getStation();
       }
     },
@@ -452,6 +634,7 @@ export default {
         "7호선": "#636b10",
         "8호선": "#e6265b",
       },
+      detailStation: false,
     };
   },
   methods: {
@@ -549,6 +732,33 @@ export default {
             var retdata = data;
             if (retdata) {
               this.stations = retdata;
+            }
+          })
+          .catch((err) => {
+            this.$store.commit("alertThrow", {
+              title: "",
+              context: err.msg,
+            });
+          });
+      }
+    },
+    getDetailStation(station, idx) {
+      if (this.line && station) {
+        this.$store
+          .dispatch("api/axios", {
+            method: "POST",
+            uri: `/subway/detailStation`,
+            params: {
+              line: this.line,
+              station: station.name,
+            },
+          })
+          .then((data) => {
+            var retdata = data;
+            if (retdata) {
+              this.detailStation = retdata;
+              this.detailStation.stationInfo = station;
+              this.detailStation.idx = idx;
             }
           })
           .catch((err) => {
