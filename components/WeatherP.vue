@@ -95,7 +95,7 @@
                   style="font-size: 24px; letter-spacing: -0.24px; color: #fff"
                 >
                   {{ today_weather.wind_direction }} /
-                  {{ today_weather.wind_speed }}
+                  {{ today_weather.wind_speed }}m/s
                 </p>
                 <p
                   class="mb-2"
