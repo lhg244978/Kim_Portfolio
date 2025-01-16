@@ -247,6 +247,7 @@ export default {
   filters: {
     formattedDate(date) {
       if (date) {
+        date = moment(date).add("-9", "hours");
         var daycode = moment(date).day();
         var dayname = "";
         switch (daycode) {
