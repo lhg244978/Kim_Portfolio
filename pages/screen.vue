@@ -263,12 +263,12 @@
             >
               <v-col cols="12" :style="`height: ${100}px;`">
                 <v-text-field
-                  outlined
+                  solo
                   hide-details
                   class="centered-input"
                   style="
                     border-radius: 20px;
-                    background-color: rgba(0, 0, 0, 0.5);
+                    background: rgba(0, 0, 0, 0.5);
                     font-size: 26px;
                   "
                   label="111"
@@ -276,13 +276,9 @@
                   color="#fff"
                   single-line
                   v-model="search"
-                  ><template v-slot:label>
-                    <v-row
-                      no-gutters
-                      class="mt-2"
-                      align="center"
-                      style="font-size: 26px"
-                    >
+                >
+                  <template v-slot:label>
+                    <v-row no-gutters align="center" style="font-size: 26px">
                       <span>
                         <v-icon
                           style="color: rgba(255, 255, 255, 0.7)"
@@ -434,15 +430,16 @@ export default {
       start: false,
       lock: false,
       home: false,
+
       detail: false,
 
       // Tester
       // black_home: false,
-      // on: false,
-      // start: false,
-      // lock: false,
-      // home: true,
-      // detail: false,
+      //  on: false,
+      //  start: false,
+      //  lock: false,
+      //  home: true,
+      //  detail: false,
 
       buttonAlert: false,
       buttonApp: null,
@@ -901,6 +898,7 @@ export default {
   left: 50% !important;
   height: 100%;
   transform: translateX(-50%);
+  top: 0px;
   & .v-label--active {
     transform: translateY(-18px) scale(0.75) translateX(-50%);
   }
@@ -918,5 +916,8 @@ i {
 }
 .v-btn__content {
   pointer-events: none;
+}
+.theme--dark .v-text-field--solo > .v-input__control > .v-input__slot {
+  background: none;
 }
 </style>
