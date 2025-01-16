@@ -152,7 +152,7 @@
                             <v-img
                               class="mx-auto"
                               contain
-                              max-width="50"
+                              max-width="70"
                               :src="`/img/weather/${item.morning_img}`"
                             >
                             </v-img>
@@ -171,7 +171,7 @@
                             <v-img
                               class="mx-auto"
                               contain
-                              max-width="50"
+                              max-width="70"
                               :src="`/img/weather/${item.afternoon_img}`"
                             >
                             </v-img>
