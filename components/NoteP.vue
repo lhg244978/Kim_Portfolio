@@ -25,7 +25,10 @@
             >
               <v-icon color="#000" size="60">mdi-note-edit-outline</v-icon>
             </v-btn>
-            <p class="mb-0 mt-10" style="font-size: 30px; color: #000">
+            <p
+              class="mb-0 mt-10"
+              style="font-size: 30px; letter-spacing: -0.3px; color: #000"
+            >
               메모입니다.
             </p>
           </v-col>

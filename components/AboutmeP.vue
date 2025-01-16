@@ -25,7 +25,10 @@
             >
               <v-icon size="60">mdi-information</v-icon>
             </v-btn>
-            <p class="mb-0 mt-10" style="font-size: 30px; color: #000">
+            <p
+              class="mb-0 mt-10"
+              style="font-size: 30px; letter-spacing: -0.3px; color: #000"
+            >
               저를 소개합니다.
             </p>
           </v-col>

@@ -25,7 +25,10 @@
             >
               <v-icon size="60">mdi-head-cog</v-icon>
             </v-btn>
-            <p class="mb-0 mt-10" style="font-size: 30px; color: #fff">
+            <p
+              class="mb-0 mt-10"
+              style="font-size: 30px; letter-spacing: -0.3px; color: #fff"
+            >
               제가 사용가능한 기술입니다.
             </p>
           </v-col>

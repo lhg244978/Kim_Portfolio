@@ -25,7 +25,10 @@
             >
               <v-icon color="#3ca4ff" size="60">mdi-subway-variant</v-icon>
             </v-btn>
-            <p class="mb-0 mt-10" style="font-size: 30px; color: #fff">
+            <p
+              class="mb-0 mt-10"
+              style="font-size: 30px; letter-spacing: -0.3px; color: #fff"
+            >
               서울시 공공데이터를 이용한 <br />
               <br />
               실시간 지하철노선로 입니다.

@@ -340,6 +340,7 @@
     <NoteP :dialog="nop" @close="nop = false"></NoteP>
     <CoupangReviewP :dialog="cr" @close="cr = false"></CoupangReviewP>
     <SubwayP :dialog="sb" @close="sb = false"></SubwayP>
+    <WeatherP :dialog="wt" @close="wt = false"></WeatherP>
     <ButtonAlert
       :dialog="buttonAlert"
       :app="buttonApp"
@@ -359,6 +360,7 @@ import CareerP from "@/components/CareerP";
 import SkillsP from "@/components/SkillsP";
 import NoteP from "@/components/NoteP";
 import SubwayP from "@/components/SubwayP";
+import WeatherP from "@/components/WeatherP";
 
 import ButtonAlert from "@/components/ButtonAlert";
 export default {
@@ -369,6 +371,7 @@ export default {
     AboutmeP: AboutmeP,
     CareerP: CareerP,
     SkillsP: SkillsP,
+    WeatherP: WeatherP,
     NoteP: NoteP,
 
     ButtonAlert: ButtonAlert,
@@ -433,6 +436,7 @@ export default {
       home: false,
       detail: false,
 
+      // Tester
       // black_home: false,
       // on: false,
       // start: false,
@@ -454,6 +458,7 @@ export default {
       nop: false,
       sb: false,
       ap: false,
+      wt: false,
 
       homeApp: [
         {
@@ -471,6 +476,14 @@ export default {
           btn_color: "#171f31",
           img: "",
           dialog: "sb",
+        },
+        {
+          name: "날씨",
+          icon: "white-balance-sunny",
+          icon_color: "#ffe168",
+          btn_color: "#3570ab",
+          img: "",
+          dialog: "wt",
         },
       ],
       homeBottomApp: [
@@ -555,6 +568,14 @@ export default {
           btn_color: "#171f31",
           img: "",
           dialog: "sb",
+        },
+        {
+          name: "날씨",
+          icon: "white-balance-sunny",
+          icon_color: "#ffe168",
+          btn_color: "#3570ab",
+          img: "",
+          dialog: "wt",
         },
       ],
 
